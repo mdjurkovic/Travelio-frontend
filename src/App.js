@@ -1,12 +1,15 @@
-import Countries from "./Components/Countries";
+import Header from "./Components/Header";
+import AdminDashboard from "./Styles/GlobalStyles";
+import Router from "./routes";
 
 const App = () => {
-
-    return (
-        <div className="App">
-            <Countries/>
-        </div>
-    );
+  return (
+    <div className="App">
+      <Header />
+      <Router />
+      <AdminDashboard />
+    </div>
+  );
 };
 
-export default App
+export default App;
