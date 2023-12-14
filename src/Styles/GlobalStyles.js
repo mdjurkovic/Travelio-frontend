@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
 
   /* Colors */
   :root {
-    --color-primary: #2D3142;
+    --color-primaryy: #2D3142;
     --color-secondary: #EE6C4D;
     --color-background: #D8F3DC;
     --color-text: #4F5D75;
@@ -78,9 +78,15 @@ const GlobalStyle = createGlobalStyle`
 
   /* Links */
   a {
-    color: var(--color-secondary);
     text-decoration: none;
     transition: all 0.3s ease-in-out;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    &:hover {
+        color: var(--color-secondary) !important; 
+    }
   }
 
   /* Buttons */
@@ -90,7 +96,6 @@ const GlobalStyle = createGlobalStyle`
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 1rem 2rem;
-    border: none;
     border-radius: 5px;
     background-color: var(--color-secondary);
     color: #fff;
@@ -98,7 +103,7 @@ const GlobalStyle = createGlobalStyle`
     transition: all 0.3s ease-in-out;
 
     &:hover {
-      background-color: var(--color-primary);
+      background-color: var(--color-secondary);
     }
   }
 
@@ -109,17 +114,16 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     padding: 0.5rem;
     border-radius: 5px;
-    border: none;
     background-color: #fff;
     color: var(--color-primary);
     margin-bottom: 1rem;
   }
   
-    .map-img {
-        height: 450px;
-        width: 1000px;
-    }  
-
+  .map-img {
+        height: 100px;
+        width: 200px;
+    }
+    
     .map-selected {
         fill: var(--color-secondary);
     }
@@ -136,7 +140,6 @@ const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
     
-
 `;
 
 export default GlobalStyle;

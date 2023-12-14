@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { useMutation } from "../../Common";
 import styled from "styled-components";
 import { CREATE_GUIDER, DELETE_GUIDER, GET_GUIDERS } from "./queries";
-import Loader from "../../Components/Loader";
+import { Loader } from "../../Components";
 
 const Table = styled.table`
   width: 100%;
@@ -22,38 +23,25 @@ const Table = styled.table`
 `;
 
 const GuidersTable = () => {
-  const newGuiderRef = useRef(null);
-
+  const guiderRef = useRef(null);
   const { loading, error, data } = useQuery(GET_GUIDERS);
-
-  const [deleteItem] = useMutation(DELETE_GUIDER, {
-    refetchQueries: [
-      { query: GET_GUIDERS }, // DocumentNode object parsed with gql
-      "GetGuiders", // Query name
-    ],
-  });
-
-  const [addItem] = useMutation(CREATE_GUIDER, {
-    refetchQueries: [
-      { query: GET_GUIDERS }, // DocumentNode object parsed with gql
-      "GetGuiders", // Query name
-    ],
-  });
-
-  useEffect(() => {
-    // Fetch initial data
-  }, []);
+  const { mutation: createGuider } = useMutation(CREATE_GUIDER, GET_GUIDERS);
+  const { mutation: deleteGuider } = useMutation(DELETE_GUIDER, GET_GUIDERS);
 
   const handleDeleteGuider = (id) => {
     const itemToUpdate = data.guiders.find((item) => item.id === id);
     if (itemToUpdate) {
-      deleteItem({ variables: { id } });
+      deleteGuider({ variables: { id } });
     }
   };
 
-  const handleAddItem = () => {
-    addItem({ variables: { guider: newGuiderRef.current.value } });
+  const handleAddGuider = () => {
+    createGuider({ variables: { guider: guiderRef.current.value } });
   };
+
+  useEffect(() => {
+    // Fetch initial data
+  }, []);
 
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
@@ -83,9 +71,9 @@ const GuidersTable = () => {
         </tbody>
       </Table>
       <div>
-        <h3>Add Item</h3>
-        <input type="text" placeholder="Name" ref={newGuiderRef} />
-        <button onClick={handleAddItem}>Add</button>
+        <h3>Add Guider</h3>
+        <input type="text" placeholder="Name" ref={guiderRef} />
+        <button onClick={handleAddGuider}>Add</button>
       </div>
     </div>
   );

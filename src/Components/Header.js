@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Link } from "../Common";
+import { countries, destinations, guiders, tours } from "../Routes/Consts";
 
-const Header = styled.header`
+const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,66 +23,47 @@ const Header = styled.header`
 
       li {
         margin-left: 3rem;
-
-        a {
-          font-size: 24px;
-          text-decoration: none;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-weight: bold;
-          transition: all 0.3s ease-in-out;
-
-          &:hover {
-            color: var(--color-secondary);
-          }
         }
       }
     }
   }
 `;
 
-const StyledLink = styled(Link).attrs(({ isSelected }) => ({
-  style: {
-    color: isSelected ? "var(--color-secondary)" : "var(--color-primary)",
-  },
-}))``;
-
-const HeaderContainer = () => {
+const Header = () => {
   const location = useLocation();
+  console.log(location);
+
   return (
-    <Header>
+    <HeaderContainer>
       <nav>
         <ul>
           <li>
-            <StyledLink to="/" isSelected={location.pathname === "/"}>
+            <Link
+              to={destinations}
+              selected={location.pathname === destinations}
+            >
               Home
-            </StyledLink>
+            </Link>
           </li>
           <li>
-            <StyledLink
-              to="/guiders"
-              isSelected={location.pathname === "/guiders"}
-            >
+            <Link to={guiders} selected={location.pathname === guiders}>
               Guiders
-            </StyledLink>
+            </Link>
           </li>
           <li>
-            <StyledLink to="/tours" isSelected={location.pathname === "/tours"}>
+            <Link to={tours} selected={location.pathname.startsWith(tours)}>
               Tours
-            </StyledLink>
+            </Link>
           </li>
           <li>
-            <StyledLink
-              to="/countries"
-              isSelected={location.pathname === "/countries"}
-            >
+            <Link to={countries} selected={location.pathname === countries}>
               Countries
-            </StyledLink>
+            </Link>
           </li>
         </ul>
       </nav>
-    </Header>
+    </HeaderContainer>
   );
 };
 
-export default HeaderContainer;
+export default Header;

@@ -1,6 +1,6 @@
-import Header from "./Components/Header";
+import { Header } from "./Components";
 import AdminDashboard from "./Styles/GlobalStyles";
-import Router from "./routes";
+import Router from "./Routes/routes";
 
 const App = () => {
   return (

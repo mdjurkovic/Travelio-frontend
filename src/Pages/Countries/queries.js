@@ -13,7 +13,7 @@ export const GET_COUNTRIES = gql`
 `;
 
 export const CREATE_COUNTRY = gql`
-  mutation AddItem($country: String!) {
+  mutation Country($country: String!) {
     createCountry(name: $country) {
       name
       createdAt
@@ -22,7 +22,7 @@ export const CREATE_COUNTRY = gql`
 `;
 
 export const UPDATE_COUNTRY = gql`
-  mutation UpdateItem($updateCountryId: ID!, $country: CountryUpdateInput!) {
+  mutation UpdateCountry($updateCountryId: ID!, $country: CountryUpdateInput!) {
     updateCountry(country: $country, id: $updateCountryId) {
       id
       name
@@ -31,7 +31,7 @@ export const UPDATE_COUNTRY = gql`
 `;
 
 export const DELETE_COUNTRY = gql`
-  mutation DeleteItem($id: ID!) {
+  mutation DeleteCountry($id: ID!) {
     deleteCountry(id: $id) {
       name
     }

@@ -1,29 +1,28 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { GET_DESTINATIONS } from "./queries";
-import Loader from "../Loader";
+import { Link } from "../../Common";
+import { Loader } from "../../Components";
 import styled from "styled-components";
 import Japan from "../../Images/Japan.jpeg";
+import { tours } from "../../Routes/Consts";
 
 const DestinationsBox = styled.div`
-  margin-top: 40px;
+  margin: 40px 0 20px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
 
-const Destination = styled.a`
+const Destination = styled(Link)`
   margin-right: 10px;
   margin-left 10px;
   width: 300px;
   height: 300px;
   background: white;
   border-radius: 0.25rem;
-  margin-bottom: 20px;
-  a {
-    height: 100%;
-  }
+  transition: all .25s ease-in-out;
 `;
 
 const DestinationImage = styled.img`
@@ -74,7 +73,12 @@ const Destinations = ({ continent }) => {
   return (
     <DestinationsBox>
       {destinationsContinent?.map((destination) => (
-        <Destination href="/" key={destination.name}>
+        <Destination
+          to={tours}
+          parameter={destination.name}
+          state={destination}
+          key={destination.name}
+        >
           <DestinationImage src={Japan} />
           <DestinationInfo>
             <h4>{destination.name}</h4>
