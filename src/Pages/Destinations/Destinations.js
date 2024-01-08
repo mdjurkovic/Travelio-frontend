@@ -9,7 +9,7 @@ import {
   DestinationLink,
   DestinationsContainer,
   ImageContainer,
-} from "./StyledComponents";
+} from "./styledComponents";
 import NewDestinationModal from "./NewDestinationModal";
 
 const Destinations = ({ continent }) => {

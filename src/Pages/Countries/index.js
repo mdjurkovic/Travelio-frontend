@@ -2,9 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { CREATE_COUNTRY, GET_COUNTRIES, UPDATE_COUNTRY } from "./queries";
-import { Loader } from "../../Components";
+import { Loader, Switch } from "../../Components";
 import { useMutation } from "../../Common";
-import { Switch } from "antd";
 
 const Table = styled.table`
   border-collapse: collapse;

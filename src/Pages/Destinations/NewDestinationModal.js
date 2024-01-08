@@ -1,7 +1,7 @@
 import { Form, Input, Modal, Select } from "antd";
 import { useQuery } from "@apollo/client";
 import { GET_COUNTRIES, GET_DESTINATION_TYPES } from "./queries";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ModalForm, ModalFormItem, ModalHeader } from "../../Common";
 
 const NewDestinationModal = ({ open, setOpen, createDestination }) => {

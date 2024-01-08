@@ -12,7 +12,7 @@ import {
   PriceTag,
   TourArticle,
   TourBox,
-} from "../StyledComponents";
+} from "../styledComponents";
 import React from "react";
 
 const TourData = ({ tours, destinationImage, deleteTour }) => {

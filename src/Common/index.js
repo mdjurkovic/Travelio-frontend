@@ -5,7 +5,7 @@ import {
   ModalForm,
   ModalFormItem,
   ModalHeader,
-} from "./StyledComponents";
+} from "../Styles/styledComponents";
 import {
   COUNTRIES_PATH,
   DESTINATIONS_PATH,

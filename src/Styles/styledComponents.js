@@ -22,4 +22,4 @@ const FlexCenter = styled.div`
   align-items: center;
 `;
 
-export { ModalHeader, ModalForm, FlexCenter, ModalFormItem };
+export { ModalHeader, ModalForm, ModalFormItem, FlexCenter };

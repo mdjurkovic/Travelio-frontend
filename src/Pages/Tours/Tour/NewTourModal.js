@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { useQuery } from "@apollo/client";
 import { GET_DESTINATION_TYPES, GET_GUIDERS } from "../queries";
-import React, { useState } from "react";
+import { useState } from "react";
 import Upload from "antd/es/upload/Upload";
 import { UploadOutlined } from "@ant-design/icons";
 import { ModalForm, ModalFormItem, ModalHeader } from "../../../Common";
