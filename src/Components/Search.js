@@ -5,6 +5,7 @@ const SearchComponent = ({ setFilter }) => {
     const lowerCase = e.target.value.toLowerCase();
     setFilter(lowerCase);
   };
+
   return (
     <span>
       <Input placeholder="Search" onChange={inputHandler} />

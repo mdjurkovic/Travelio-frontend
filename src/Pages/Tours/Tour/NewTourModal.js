@@ -1,5 +1,4 @@
 import {
-  Button,
   DatePicker,
   Form,
   Input,
@@ -12,9 +11,8 @@ import {
 import { useQuery } from "@apollo/client";
 import { GET_DESTINATION_TYPES, GET_GUIDERS } from "../queries";
 import { useState } from "react";
-import Upload from "antd/es/upload/Upload";
-import { UploadOutlined } from "@ant-design/icons";
 import { ModalForm, ModalFormItem, ModalHeader } from "../../../Common";
+import { Upload } from "../../../Components";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -98,14 +96,14 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           name="name"
           rules={[{ required: true, message: "Input the name!" }]}
         >
-          <Input placeholder="Name" />
+          <Input placeholder="Name of the tour" />
         </ModalFormItem>
         <ModalFormItem
           label="Type"
           name="type"
           rules={[{ required: true, message: "Select the tour type!" }]}
         >
-          <Select mode="multiple">
+          <Select mode="multiple" placeholder="Type of tour">
             {destinationTypes.map(({ id, label }) => (
               <Select.Option key={id} value={label}>
                 {label}
@@ -114,7 +112,7 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           </Select>
         </ModalFormItem>
         <ModalFormItem label="Guider" name="guider">
-          <Select>
+          <Select placeholder="Guider for the tour">
             {guiders.map(({ id, name }) => (
               <Select.Option key={id} value={id}>
                 {name}
@@ -156,14 +154,7 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           <Switch />
         </ModalFormItem>
         <ModalFormItem label="Cover">
-          <Upload
-            name="cover"
-            beforeUpload={beforeUpload}
-            showUploadList={true}
-            maxCount={1}
-          >
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-          </Upload>
+          <Upload beforeUpload={beforeUpload} />
         </ModalFormItem>
         <ModalFormItem label="Passengers" name="passengers">
           <Slider range defaultValue={defaultPassengers} />

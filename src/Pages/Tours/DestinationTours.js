@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { CREATE_TOUR, DELETE_TOUR, GET_TOURS } from "./queries";
 import { Loader, PopConfirm, Tooltip } from "../../Components";
 import { DESTINATIONS_PATH, useMutation } from "../../Common";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import NewTourModal from "./Tour/NewTourModal";
 import { DeleteOutlined } from "@ant-design/icons";
 import { TourName } from "./styledComponents";
+import { CREATE_TOUR, DELETE_TOUR, GET_TOURS } from "./queries";
 import { DELETE_DESTINATION, GET_DESTINATIONS } from "../Destinations/queries";
 
 const DestinationTours = () => {

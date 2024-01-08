@@ -100,6 +100,7 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    min-width: 6rem;
 
     &:hover {
       background-color: var(--color-secondary);
@@ -109,9 +110,6 @@ const GlobalStyle = createGlobalStyle`
   /* Forms */
   input[type="text"],
   input[type="email"],
-  input {
-    height: 3rem;
-  }
   textarea {
     width: 100%;
     padding: 0.5rem;
@@ -139,6 +137,10 @@ const GlobalStyle = createGlobalStyle`
     
     .map-selected:hover, .map-unselected:hover {
         cursor: pointer;
+    }
+    
+     button, input, .ant-select {
+        height: 3rem;
     }
 `;
 

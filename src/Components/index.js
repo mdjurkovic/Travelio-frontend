@@ -5,7 +5,9 @@ import SearchComponent from "./Search";
 import ButtonComponent from "./Button";
 import LinkComponent from "./Link";
 import SwitchComponent from "./Switch";
+import SelectComponent from "./Select";
 import TooltipComponent from "./Tooltip";
+import UploadComponent from "./Upload";
 import BlurryLoadingImage from "./LazyImage";
 import PopConfirm from "./PopConfirm";
 
@@ -17,7 +19,9 @@ export {
   SearchComponent as Search,
   ButtonComponent as Button,
   SwitchComponent as Switch,
+  SelectComponent as Select,
   TooltipComponent as Tooltip,
+  UploadComponent as Upload,
   BlurryLoadingImage,
   PopConfirm,
 };
