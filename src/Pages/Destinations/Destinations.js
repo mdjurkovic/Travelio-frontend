@@ -1,9 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { CREATE_DESTINATION, GET_DESTINATIONS } from "./queries";
-import { BlurryLoadingImage, useMutation } from "../../Common";
-import { Loader } from "../../Components";
-import { TOURS } from "../../Routes/Consts";
+import { TOURS_PATH, useMutation } from "../../Common";
+import { BlurryLoadingImage, Loader } from "../../Components";
 import {
   Destination,
   DestinationInfo,
@@ -59,7 +58,7 @@ const Destinations = ({ continent }) => {
       {destinationsContinent?.map((destination) => (
         <Destination key={destination.id}>
           <DestinationLink
-            to={TOURS}
+            to={TOURS_PATH}
             parameter={destination.name}
             state={destination}
           >

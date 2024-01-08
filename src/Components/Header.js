@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import { Link } from "../Common";
-import { COUNTRIES, DESTINATIONS, GUIDERS, TOURS } from "../Routes/Consts";
+import { Link } from "../Components";
+import {
+  COUNTRIES_PATH,
+  DESTINATIONS_PATH,
+  GUIDERS_PATH,
+  TOURS_PATH,
+} from "../Common";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -37,24 +42,33 @@ const Header = () => {
         <ul>
           <li>
             <Link
-              to={DESTINATIONS}
-              selected={location.pathname === DESTINATIONS}
+              to={DESTINATIONS_PATH}
+              selected={location.pathname === DESTINATIONS_PATH}
             >
               Home
             </Link>
           </li>
           <li>
-            <Link to={GUIDERS} selected={location.pathname === GUIDERS}>
+            <Link
+              to={GUIDERS_PATH}
+              selected={location.pathname === GUIDERS_PATH}
+            >
               Guiders
             </Link>
           </li>
           <li>
-            <Link to={TOURS} selected={location.pathname.startsWith(TOURS)}>
+            <Link
+              to={TOURS_PATH}
+              selected={location.pathname.startsWith(TOURS_PATH)}
+            >
               Tours
             </Link>
           </li>
           <li>
-            <Link to={COUNTRIES} selected={location.pathname === COUNTRIES}>
+            <Link
+              to={COUNTRIES_PATH}
+              selected={location.pathname === COUNTRIES_PATH}
+            >
               Countries
             </Link>
           </li>

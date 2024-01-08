@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { FlexCenter, Link } from "../../Common";
+import { FlexCenter } from "../../Common";
+import { Link } from "../../Components";
 
 export const DestinationsContainer = styled.div`
   margin: 40px 0 20px;
