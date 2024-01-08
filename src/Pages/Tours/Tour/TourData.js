@@ -1,9 +1,5 @@
-import {
-  BlurryLoadingImage,
-  dateFormat,
-  nightsDifference,
-  PopConfirm,
-} from "../../../Common";
+import { dateFormat, nightsDifference } from "../../../Common";
+import { BlurryLoadingImage, PopConfirm } from "../../../Components";
 import {
   Availability,
   AvailabilityText,

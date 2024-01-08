@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { DELETE_TOUR, GET_TOURS } from "./queries";
-import { Loader } from "../../Components";
-import { Search, useMutation } from "../../Common";
+import { Loader, Search } from "../../Components";
+import { useMutation } from "../../Common";
 import React, { useEffect, useState } from "react";
 import { TourData } from "./Tour";
 

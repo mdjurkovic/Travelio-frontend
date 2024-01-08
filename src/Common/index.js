@@ -1,26 +1,26 @@
-import LinkComponent from "./Link";
-import SearchComponent from "./Search";
-import ButtonComponent from "./Button";
-import { dateFormat, nightsDifference } from "./DateFormat";
+import { dateFormat, nightsDifference } from "./utils";
 import useMutationHelper from "./useMutationHelper";
-import BlurryLoadingImage from "./LazyImage";
-import PopConfirm from "./PopConfirm";
 import {
   FlexCenter,
   ModalForm,
   ModalFormItem,
   ModalHeader,
 } from "./StyledComponents";
+import {
+  COUNTRIES_PATH,
+  DESTINATIONS_PATH,
+  GUIDERS_PATH,
+  TOURS_PATH,
+} from "./consts";
 
 export {
-  LinkComponent as Link,
-  SearchComponent as Search,
-  ButtonComponent as Button,
+  COUNTRIES_PATH,
+  DESTINATIONS_PATH,
+  GUIDERS_PATH,
+  TOURS_PATH,
   dateFormat,
   nightsDifference,
   useMutationHelper as useMutation,
-  BlurryLoadingImage,
-  PopConfirm,
   ModalForm,
   ModalHeader,
   FlexCenter,
