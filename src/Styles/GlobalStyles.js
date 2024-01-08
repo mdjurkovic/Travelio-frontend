@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    color: var(--color-text);
+    //color: var(--color-text);
   }
 
   body {
@@ -49,7 +49,6 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     color: var(--color-primary);
-    margin-bottom: 0.5rem;
   }
 
   h1 {
@@ -65,7 +64,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
@@ -95,7 +94,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
     background-color: var(--color-secondary);
     color: #fff;
@@ -110,13 +109,15 @@ const GlobalStyle = createGlobalStyle`
   /* Forms */
   input[type="text"],
   input[type="email"],
+  input {
+    height: 3rem;
+  }
   textarea {
     width: 100%;
     padding: 0.5rem;
     border-radius: 5px;
     background-color: #fff;
     color: var(--color-primary);
-    margin-bottom: 1rem;
   }
   
   .map-img {
@@ -132,14 +133,13 @@ const GlobalStyle = createGlobalStyle`
         fill: var(--color-primary);
     }
     
-    .map-unselected:hover {
+    .map-unselected:hover, .anticon:hover svg {
         fill: var(--color-secondary);
     }
     
     .map-selected:hover, .map-unselected:hover {
         cursor: pointer;
     }
-    
 `;
 
 export default GlobalStyle;

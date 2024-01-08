@@ -1,6 +1,6 @@
 import { Navigate, useRoutes } from "react-router-dom";
-import { Countries, Guiders, Home, Tours } from "../Pages";
-import { countries, destinations, guiders, tours } from "./Consts";
+import { Countries, DestinationTours, Guiders, Home, Tours } from "../Pages";
+import { COUNTRIES, DESTINATIONS, GUIDERS, TOURS } from "./Consts";
 // layouts
 //import DashboardLayout from './layouts/dashboard';
 //import LogoOnlyLayout from './layouts/LogoOnlyLayout';
@@ -11,28 +11,28 @@ import { countries, destinations, guiders, tours } from "./Consts";
 export default function Router() {
   return useRoutes([
     {
-      path: destinations,
+      path: DESTINATIONS,
       element: <Home />,
     },
     {
-      path: `${destinations}:destinationName`,
+      path: `${TOURS}/:tourName`,
+      element: <DestinationTours />,
+    },
+    {
+      path: TOURS,
       element: <Tours />,
     },
     {
-      path: tours,
-      element: <Tours />,
-    },
-    {
-      path: guiders,
+      path: GUIDERS,
       element: <Guiders />,
     },
     {
-      path: countries,
+      path: COUNTRIES,
       element: <Countries />,
     },
     {
       path: "*",
-      element: <Navigate to={guiders} replace />,
+      element: <Navigate to={DESTINATIONS} replace />,
     },
   ]);
 }

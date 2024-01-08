@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_TOURS = gql`
-  query Tours($destinationId: ID) {
+  query Tours($destinationId: ID = null) {
     tours(destinationId: $destinationId) {
       id
       name
@@ -10,6 +10,7 @@ export const GET_TOURS = gql`
       returnDate
       minPassengers
       maxPassengers
+      image
       guider {
         id
         name

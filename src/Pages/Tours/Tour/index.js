@@ -1,4 +1,4 @@
 import TourData from "./TourData";
-import NewTourModal from "./TourModal";
+import NewTourModal from "./NewTourModal";
 
 export { NewTourModal, TourData };

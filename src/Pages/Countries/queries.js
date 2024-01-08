@@ -5,9 +5,7 @@ export const GET_COUNTRIES = gql`
     countries {
       id
       name
-      destinations {
-        name
-      }
+      active
     }
   }
 `;
@@ -16,16 +14,17 @@ export const CREATE_COUNTRY = gql`
   mutation Country($country: String!) {
     createCountry(name: $country) {
       name
+      active
       createdAt
     }
   }
 `;
 
 export const UPDATE_COUNTRY = gql`
-  mutation UpdateCountry($updateCountryId: ID!, $country: CountryUpdateInput!) {
-    updateCountry(country: $country, id: $updateCountryId) {
+  mutation UpdateCountry($id: ID!, $active: Boolean!) {
+    updateCountry(id: $id, active: $active) {
       id
-      name
+      active
     }
   }
 `;

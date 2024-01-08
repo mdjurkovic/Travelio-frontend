@@ -6,8 +6,10 @@ export const GET_GUIDERS = gql`
       id
       name
       tours {
+        id
         name
       }
+      toursCount
       preferences {
         label
       }
@@ -26,6 +28,14 @@ export const DELETE_GUIDER = gql`
 export const CREATE_GUIDER = gql`
   mutation AddItem($guider: String!) {
     createGuider(name: $guider) {
+      name
+    }
+  }
+`;
+
+export const UPDATE_GUIDER = gql`
+  mutation UpdateItem($id: ID!, $guider: String!) {
+    updateGuider(id: $id, guider: $guider) {
       name
     }
   }

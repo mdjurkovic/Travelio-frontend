@@ -1,91 +1,92 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { GET_DESTINATIONS } from "./queries";
-import { Link } from "../../Common";
+import { CREATE_DESTINATION, GET_DESTINATIONS } from "./queries";
+import { BlurryLoadingImage, useMutation } from "../../Common";
 import { Loader } from "../../Components";
-import styled from "styled-components";
-import Japan from "../../Images/Japan.jpeg";
-import { tours } from "../../Routes/Consts";
-
-const DestinationsBox = styled.div`
-  margin: 40px 0 20px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const Destination = styled(Link)`
-  margin-right: 10px;
-  margin-left 10px;
-  width: 300px;
-  height: 300px;
-  background: white;
-  border-radius: 0.25rem;
-  transition: all .25s ease-in-out;
-`;
-
-const DestinationImage = styled.img`
-  height: calc(100% / 4 * 3);
-  width: 100%;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-`;
-
-const DestinationInfo = styled.div`
-  padding: 1rem;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import { TOURS } from "../../Routes/Consts";
+import {
+  Destination,
+  DestinationInfo,
+  DestinationLink,
+  DestinationsContainer,
+  ImageContainer,
+} from "./StyledComponents";
+import NewDestinationModal from "./NewDestinationModal";
 
 const Destinations = ({ continent }) => {
   const { loading, error, data } = useQuery(GET_DESTINATIONS, {
     variables: {},
   });
-
-  const [destinationsContinent, setDestinationsContinent] = useState(
-    data ? data.destinations : null
+  const {
+    mutation: createDestination,
+    contextHolder: createDestinationContext,
+  } = useMutation(
+    CREATE_DESTINATION,
+    GET_DESTINATIONS,
+    "Error creating destination",
+    "Destination successfully created",
+    {}
   );
 
+  const [destinationsContinent, setDestinationsContinent] = useState(
+    data ? data.destinations : []
+  );
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    let destinations = null;
+    let destinations = [];
     if (data) destinations = data.destinations;
 
     if (!continent) setDestinationsContinent(destinations);
     else
       setDestinationsContinent(
-        destinations?.filter(
+        destinations.filter(
           (destination) => destination.country.continent === continent
         )
       );
   }, [continent, data]);
 
-  if (loading)
-    return (
-      <DestinationsBox>
-        <Loader />
-      </DestinationsBox>
-    );
+  useEffect(() => {
+    // Fetch initial data
+  }, []);
+
+  if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
 
   return (
-    <DestinationsBox>
+    <DestinationsContainer>
+      {createDestinationContext}
       {destinationsContinent?.map((destination) => (
-        <Destination
-          to={tours}
-          parameter={destination.name}
-          state={destination}
-          key={destination.name}
-        >
-          <DestinationImage src={Japan} />
-          <DestinationInfo>
-            <h4>{destination.name}</h4>
-          </DestinationInfo>
+        <Destination key={destination.id}>
+          <DestinationLink
+            to={TOURS}
+            parameter={destination.name}
+            state={destination}
+          >
+            <ImageContainer>
+              <BlurryLoadingImage image={destination.image} />
+            </ImageContainer>
+            <DestinationInfo>
+              <h4>{destination.name}</h4>
+            </DestinationInfo>
+          </DestinationLink>
         </Destination>
       ))}
-    </DestinationsBox>
+      {open && (
+        <NewDestinationModal
+          open={open}
+          setOpen={setOpen}
+          createDestination={createDestination}
+        />
+      )}
+      <Destination onClick={() => setOpen(true)} key="new">
+        <DestinationLink to="">
+          <DestinationInfo>
+            <h4>NEW</h4>
+          </DestinationInfo>
+        </DestinationLink>
+      </Destination>
+    </DestinationsContainer>
   );
 };
 

@@ -2,13 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { Link } from "../Common";
-import { countries, destinations, guiders, tours } from "../Routes/Consts";
+import { COUNTRIES, DESTINATIONS, GUIDERS, TOURS } from "../Routes/Consts";
 
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   padding: 30px;
   margin-bottom: 40px;
 
@@ -22,7 +21,7 @@ const HeaderContainer = styled.header`
       margin: 0;
 
       li {
-        margin-left: 3rem;
+        margin-left: 48px;
         }
       }
     }
@@ -31,7 +30,6 @@ const HeaderContainer = styled.header`
 
 const Header = () => {
   const location = useLocation();
-  console.log(location);
 
   return (
     <HeaderContainer>
@@ -39,24 +37,24 @@ const Header = () => {
         <ul>
           <li>
             <Link
-              to={destinations}
-              selected={location.pathname === destinations}
+              to={DESTINATIONS}
+              selected={location.pathname === DESTINATIONS}
             >
               Home
             </Link>
           </li>
           <li>
-            <Link to={guiders} selected={location.pathname === guiders}>
+            <Link to={GUIDERS} selected={location.pathname === GUIDERS}>
               Guiders
             </Link>
           </li>
           <li>
-            <Link to={tours} selected={location.pathname.startsWith(tours)}>
+            <Link to={TOURS} selected={location.pathname.startsWith(TOURS)}>
               Tours
             </Link>
           </li>
           <li>
-            <Link to={countries} selected={location.pathname === countries}>
+            <Link to={COUNTRIES} selected={location.pathname === COUNTRIES}>
               Countries
             </Link>
           </li>

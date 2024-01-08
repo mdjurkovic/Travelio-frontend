@@ -1,23 +1,29 @@
 import { useMutation } from "@apollo/client";
+import useMessage from "./useMessage";
 
 const useMutationHelper = (
   query,
   refetchQuery,
-  refetchVariables,
-  refetchQueryName
+  errorMessage = "Error",
+  successMessage = "Success",
+  refetchVariables
 ) => {
-  try {
-    const [mutation] = useMutation(query, {
-      refetchQueries: [
-        { query: refetchQuery, variables: refetchVariables },
-        refetchQueryName,
-      ],
-    });
+  const { success, error, contextHolder } = useMessage({ key: successMessage });
 
-    return { mutation };
-  } catch (e) {
-    alert("Failed mutation: ", e);
-  }
+  const [mutation] = useMutation(query, {
+    refetchQueries: [{ query: refetchQuery, variables: refetchVariables }],
+  });
+
+  const asyncMutation = async (variables) => {
+    try {
+      await mutation({ variables });
+      success(successMessage);
+    } catch {
+      error(errorMessage);
+    }
+  };
+
+  return { mutation: asyncMutation, contextHolder };
 };
 
 export default useMutationHelper;

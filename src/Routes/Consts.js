@@ -1,4 +1,4 @@
-export const countries = "/countries";
-export const destinations = "/destinations";
-export const guiders = "/guiders";
-export const tours = "/tours";
+export const COUNTRIES = "/countries";
+export const DESTINATIONS = "/destinations";
+export const GUIDERS = "/guiders";
+export const TOURS = "/tours";
