@@ -6,6 +6,7 @@ export const GET_COUNTRIES = gql`
       id
       name
       active
+      continent
     }
   }
 `;

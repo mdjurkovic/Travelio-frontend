@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { CREATE_COUNTRY, GET_COUNTRIES, UPDATE_COUNTRY } from "./queries";
-import { Loader, Switch } from "../../Components";
+import { Loader, Switch, WorldMap } from "../../Components";
 import { useMutation } from "../../Common";
 
 const Table = styled.table`
@@ -32,7 +32,6 @@ const CountriesContainer = styled.div`
 `;
 
 const Countries = () => {
-  const countryRef = useRef(null);
   const { loading, error, data } = useQuery(GET_COUNTRIES);
   const { mutation: createCountry } = useMutation(
     CREATE_COUNTRY,
@@ -49,9 +48,8 @@ const Countries = () => {
       "Country successfully updated"
     );
 
-  useEffect(() => {
-    // Fetch initial data
-  }, []);
+  const countryRef = useRef(null);
+  const [selected, onSelect] = useState(null);
 
   const handleSwitchOnChange = async (id, active) => {
     await updateCountry({ id, active });
@@ -65,10 +63,15 @@ const Countries = () => {
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
 
+  const countries = !selected
+    ? data.countries
+    : data.countries.filter((country) => country.continent === selected);
+
   return (
     <>
       {updateCountryContext}
       <CountriesContainer>
+        <WorldMap selected={selected} onSelect={onSelect} />
         <Table>
           <thead>
             <tr>
@@ -77,7 +80,7 @@ const Countries = () => {
             </tr>
           </thead>
           <tbody>
-            {data.countries.map(({ id, name, active }) => (
+            {countries.map(({ id, name, active }) => (
               <tr key={id}>
                 <td>
                   <CountryName>{name}</CountryName>

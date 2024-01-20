@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { DELETE_TOUR, GET_TOURS } from "./queries";
 import { Loader, Search } from "../../Components";
 import { useMutation } from "../../Common";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TourData } from "./Tour";
 
 const Tours = () => {
@@ -17,10 +17,6 @@ const Tours = () => {
     );
 
   const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    // Fetch initial data
-  }, []);
 
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;

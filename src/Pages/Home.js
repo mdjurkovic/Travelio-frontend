@@ -15,6 +15,20 @@ const Home = () => {
   return (
     <HomeBox>
       <WorldMap onSelect={onSelect} selected={selected} />
+      <span>
+        <s>1 countries upload</s> <br />
+        <s>
+          2 fix button/input styling <br />
+        </s>
+        <s>3 cascade delete guiders / lock finished tours</s>
+        <br />
+        4 dont delete destination, deactivate them
+        <br />
+        5 passengers <br />
+        6 edit tour <br />
+        <s>7 countries world map</s>
+        <br />
+      </span>
       <Destinations continent={selected} />
     </HomeBox>
   );

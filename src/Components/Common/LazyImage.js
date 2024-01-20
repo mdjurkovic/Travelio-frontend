@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import DefaultLoaderImage from "../Images/Image-loader.png";
-import DefaultImage from "../Images/Default.jpeg";
+import DefaultLoaderImage from "../../Images/Image-loader.png";
+import DefaultImage from "../../Images/Default.jpeg";
 
 const StyledImage = styled.img`
   filter: ${(props) => (props.imageLoading ? "blur(20px)" : "")};
@@ -25,6 +25,10 @@ const BlurryLoadingImage = ({
     loadingImage.src = src ? `/images/${src}` : DefaultImage;
     loadingImage.onload = () => {
       setCurrentImage(loadingImage.src);
+      setLoading(false);
+    };
+    loadingImage.onerror = () => {
+      setCurrentImage(DefaultImage);
       setLoading(false);
     };
   };

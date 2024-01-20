@@ -1,7 +1,7 @@
-import { dateFormat, nightsDifference } from "../../../Common";
+import { dateFormat, dueDate, nightsDifference } from "../../../Common";
 import { BlurryLoadingImage, PopConfirm } from "../../../Components";
 import {
-  Availability,
+  AvailabilityContainer,
   AvailabilityText,
   DateSection,
   DaysSection,
@@ -14,12 +14,29 @@ import {
   TourBox,
 } from "../styledComponents";
 import React from "react";
+import { CheckCircleFilled, CloseCircleFilled } from "@ant-design/icons";
 
 const TourData = ({ tours, destinationImage, deleteTour }) => {
   if (!tours.length)
     return (
       <NotFound>No tours for this destination or selected filter(s)</NotFound>
     );
+
+  const AvailabilitySection = ({ departureDate }) => {
+    const isDueDate = dueDate(departureDate);
+
+    return isDueDate ? (
+      <AvailabilityContainer active={false}>
+        <CloseCircleFilled />
+        <AvailabilityText>Not available</AvailabilityText>
+      </AvailabilityContainer>
+    ) : (
+      <AvailabilityContainer active={true}>
+        <CheckCircleFilled />
+        <AvailabilityText>Available</AvailabilityText>
+      </AvailabilityContainer>
+    );
+  };
 
   const handleDelete = async (id) => {
     await deleteTour({ id });
@@ -28,7 +45,16 @@ const TourData = ({ tours, destinationImage, deleteTour }) => {
   return (
     <>
       {tours.map(
-        ({ id, name, departureDate, returnDate, nights, price, image }) => (
+        ({
+          id,
+          name,
+          departureDate,
+          returnDate,
+          nights,
+          price,
+          image,
+          guider,
+        }) => (
           <TourArticle key={id}>
             <TourBox key={id}>
               <DateSection>
@@ -52,10 +78,12 @@ const TourData = ({ tours, destinationImage, deleteTour }) => {
               </ImageSection>
               <NameSection>
                 <h4>{name}</h4>
-                <Availability active={true}>
-                  <AvailabilityText>Available</AvailabilityText>
-                </Availability>
+                <AvailabilitySection departureDate={departureDate} />
               </NameSection>
+              <div>
+                <h5>Guider</h5>
+                {guider.active ? guider.name : "TBD"}
+              </div>
               <PriceSection>
                 <h5>Price</h5>
                 <span>

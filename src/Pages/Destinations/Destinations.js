@@ -1,5 +1,4 @@
-import { useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { CREATE_DESTINATION, GET_DESTINATIONS } from "./queries";
 import { TOURS_PATH, useMutation } from "../../Common";
 import { BlurryLoadingImage, Loader } from "../../Components";
@@ -10,9 +9,10 @@ import {
   DestinationsContainer,
   ImageContainer,
 } from "./styledComponents";
+import { useQuery } from "@apollo/client";
 import NewDestinationModal from "./NewDestinationModal";
 
-const Destinations = ({ continent }) => {
+const Destinations = memo(({ continent }) => {
   const { loading, error, data } = useQuery(GET_DESTINATIONS, {
     variables: {},
   });
@@ -27,35 +27,42 @@ const Destinations = ({ continent }) => {
     {}
   );
 
-  const [destinationsContinent, setDestinationsContinent] = useState(
-    data ? data.destinations : []
-  );
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    let destinations = [];
-    if (data) destinations = data.destinations;
-
-    if (!continent) setDestinationsContinent(destinations);
-    else
-      setDestinationsContinent(
-        destinations.filter(
-          (destination) => destination.country.continent === continent
-        )
-      );
-  }, [continent, data]);
-
-  useEffect(() => {
-    // Fetch initial data
-  }, []);
 
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
 
+  const destinations = !continent
+    ? data.destinations
+    : data.destinations.filter(
+        (destination) => destination.country.continent === continent
+      );
+
+  const Modal = () => {
+    return (
+      <>
+        <Destination onClick={() => setOpen(true)} key="new">
+          <DestinationLink to="">
+            <DestinationInfo>
+              <h4>NEW</h4>
+            </DestinationInfo>
+          </DestinationLink>
+        </Destination>
+        {open && (
+          <NewDestinationModal
+            open={open}
+            setOpen={setOpen}
+            createDestination={createDestination}
+          />
+        )}
+      </>
+    );
+  };
+
   return (
     <DestinationsContainer>
       {createDestinationContext}
-      {destinationsContinent?.map((destination) => (
+      {destinations.map((destination) => (
         <Destination key={destination.id}>
           <DestinationLink
             to={TOURS_PATH}
@@ -71,22 +78,9 @@ const Destinations = ({ continent }) => {
           </DestinationLink>
         </Destination>
       ))}
-      {open && (
-        <NewDestinationModal
-          open={open}
-          setOpen={setOpen}
-          createDestination={createDestination}
-        />
-      )}
-      <Destination onClick={() => setOpen(true)} key="new">
-        <DestinationLink to="">
-          <DestinationInfo>
-            <h4>NEW</h4>
-          </DestinationInfo>
-        </DestinationLink>
-      </Destination>
+      <Modal />
     </DestinationsContainer>
   );
-};
+});
 
 export default Destinations;

@@ -3,7 +3,7 @@ import { FlexCenter } from "../../Common";
 import { Link } from "../../Components";
 
 export const DestinationsContainer = styled.div`
-  margin: 40px 0 20px;
+  margin-top: 40px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;

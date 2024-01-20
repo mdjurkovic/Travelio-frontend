@@ -9,3 +9,8 @@ export function dateFormat(date) {
     formattedDate.getMonth() + 1
   }.${formattedDate.getFullYear()}.`;
 }
+
+export function dueDate(date) {
+  const departureDate = new Date(date);
+  return departureDate < new Date();
+}

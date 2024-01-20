@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     --color-text: #4F5D75;
     --color-warning: #FFC107;
     --color-affirmative: #7ABD30;
+    --color-negative: #FF3333;
   }
 
   /* Reset */
@@ -100,7 +101,6 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    min-width: 6rem;
 
     &:hover {
       background-color: var(--color-secondary);

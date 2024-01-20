@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Loader, PopConfirm, Tooltip } from "../../Components";
 import { DESTINATIONS_PATH, useMutation } from "../../Common";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TourData } from "./Tour";
 import { Navigate, useLocation } from "react-router-dom";
 import NewTourModal from "./Tour/NewTourModal";
@@ -45,10 +45,6 @@ const DestinationTours = () => {
     "Destination successfully deleted",
     {}
   );
-
-  useEffect(() => {
-    // Fetch initial data
-  }, []);
 
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;

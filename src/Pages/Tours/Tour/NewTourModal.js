@@ -90,6 +90,7 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
         }}
         layout="horizontal"
         form={form}
+        initialValues={{ passengers: defaultPassengers }}
       >
         <ModalFormItem
           label="Name"
@@ -157,7 +158,7 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           <Upload beforeUpload={beforeUpload} />
         </ModalFormItem>
         <ModalFormItem label="Passengers" name="passengers">
-          <Slider range defaultValue={defaultPassengers} />
+          <Slider range />
         </ModalFormItem>
       </ModalForm>
     </Modal>

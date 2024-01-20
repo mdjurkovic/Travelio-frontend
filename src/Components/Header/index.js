@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import { Link } from "../Components";
+import { Link } from "../../Components";
 import {
   COUNTRIES_PATH,
   DESTINATIONS_PATH,
   GUIDERS_PATH,
   TOURS_PATH,
-} from "../Common";
+} from "../../Common";
 
 const HeaderContainer = styled.header`
   display: flex;

@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_COUNTRIES, GET_DESTINATION_TYPES } from "./queries";
 import { useState } from "react";
 import { ModalForm, ModalFormItem, ModalHeader } from "../../Common";
+import { Upload } from "../../Components";
 
 const NewDestinationModal = ({ open, setOpen, createDestination }) => {
   const {
@@ -20,6 +21,12 @@ const NewDestinationModal = ({ open, setOpen, createDestination }) => {
   const [form] = Form.useForm();
   const destinationTypes = dtData ? dtData.destinationTypes : [];
   const countries = cData ? cData.countries : [];
+  const [coverName, setCoverName] = useState("");
+
+  const beforeUpload = (file) => {
+    setCoverName(file.name);
+    return false;
+  };
 
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
@@ -36,7 +43,7 @@ const NewDestinationModal = ({ open, setOpen, createDestination }) => {
       const destination = {
         name: values.name,
         type: jsonArray,
-        //image: values.image,
+        image: coverName,
         country: values.country,
       };
 
@@ -97,7 +104,11 @@ const NewDestinationModal = ({ open, setOpen, createDestination }) => {
             ))}
           </Select>
         </ModalFormItem>
-        <ModalFormItem label="Country" name="country">
+        <ModalFormItem
+          label="Country"
+          name="country"
+          rules={[{ required: true, message: "Select the country!" }]}
+        >
           <Select placeholder="Country" showSearch={true}>
             {countries.map(({ id, name }) => (
               <Select.Option key={id} value={id} filterOption={filterOption}>
@@ -105,6 +116,9 @@ const NewDestinationModal = ({ open, setOpen, createDestination }) => {
               </Select.Option>
             ))}
           </Select>
+        </ModalFormItem>
+        <ModalFormItem label="Cover">
+          <Upload beforeUpload={beforeUpload} />
         </ModalFormItem>
       </ModalForm>
     </Modal>

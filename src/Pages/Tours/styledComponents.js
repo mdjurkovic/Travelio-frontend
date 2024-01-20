@@ -48,31 +48,16 @@ export const NameSection = styled.div`
   width: 400px;
 `;
 
-export const Availability = styled.i`
+export const AvailabilityContainer = styled.i`
   vertical-align: middle;
   display: inline-block;
   padding-right: 4px;
-  color: var(--color-affirmative);
-  &:before {
-    display: inline-block;
-    content: "✔";
-    text-align: center;
-    border-radius: 50%;
-    font: icon;
-    line-height: 21.5px;
-    height: 18.5px;
-    width: 18.5px;
-    ${({ active }) =>
-      active &&
-      `
-    background-color: rgb(122, 189, 48, 0.4);
-  `}
-  }
+  color: ${(props) =>
+    props.active ? "var(--color-affirmative);" : "var(--color-negative)"};
 `;
 
 export const AvailabilityText = styled.span`
-  padding-left: 8px;
-  color: var(--color-affirmative);
+  padding-left: 4px;
 `;
 
 export const PriceSection = styled.div`

@@ -37,12 +37,6 @@ export const CREATE_DESTINATION = gql`
   mutation CreateDestination($destination: DestinationCreateInput) {
     createDestination(destination: $destination) {
       name
-      id
-      image
-      country {
-        name
-        continent
-      }
     }
   }
 `;
@@ -51,12 +45,6 @@ export const DELETE_DESTINATION = gql`
   mutation DeleteDestination($id: ID!) {
     deleteDestination(id: $id) {
       name
-      id
-      image
-      country {
-        name
-        continent
-      }
     }
   }
 `;

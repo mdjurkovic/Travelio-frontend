@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { Loader, PopConfirm } from "../../Components";
@@ -9,7 +9,7 @@ import {
   GET_GUIDERS,
   UPDATE_GUIDER,
 } from "./queries";
-import { Avatar, Typography } from "antd";
+import { Avatar, Form, Input, Typography } from "antd";
 
 const { Paragraph } = Typography;
 
@@ -42,13 +42,11 @@ const Table = styled.table`
 const AddGuiderContainer = styled.div`
   text-align: center;
   margin-top: 48px;
-  button {
-    margin-top: 20px;
-  }
 `;
 
 const GuidersTable = () => {
   const createGuiderRef = useRef(null);
+  const [form] = Form.useForm();
   const { loading, error, data } = useQuery(GET_GUIDERS);
   const { mutation: createGuider, contextHolder: contextHolderCreate } =
     useMutation(
@@ -79,23 +77,18 @@ const GuidersTable = () => {
     await deleteGuider({ id });
   };
 
-  const handleAddGuider = () => {
+  const handleAddGuider = async () => {
     try {
-      createGuider({ guider: createGuiderRef.current.value }).then(
-        () => (createGuiderRef.current.value = null)
-      );
+      await createGuider({ guider: createGuiderRef.current.input.value });
+      form.resetFields(["guider"]);
     } catch (e) {
-      console.log(e);
+      alert(e);
     }
   };
 
   const handleUpdateGuider = async (id, newName) => {
     await updateGuider({ id, guider: newName });
   };
-
-  useEffect(() => {
-    // Fetch initial data
-  }, []);
 
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
@@ -142,11 +135,23 @@ const GuidersTable = () => {
           ))}
         </tbody>
       </Table>
-      <AddGuiderContainer>
-        <h3>Add Guider</h3>
-        <input type="text" placeholder="Name" ref={createGuiderRef} />
-        <button onClick={handleAddGuider}>Add</button>
-      </AddGuiderContainer>
+      <Form form={form}>
+        <AddGuiderContainer>
+          <h3>New Guider</h3>
+          <Form.Item
+            name="guider"
+            rules={[{ required: true, message: "Input the guider name!" }]}
+          >
+            <Input
+              type="text"
+              placeholder="Name"
+              ref={createGuiderRef}
+              allowClear
+            />
+          </Form.Item>
+          <button onClick={handleAddGuider}>New</button>
+        </AddGuiderContainer>
+      </Form>
     </div>
   );
 };
