@@ -1,18 +1,17 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { CREATE_DESTINATION, GET_DESTINATIONS } from "./queries";
-import { TOURS_PATH, useMutation } from "../../Common";
-import { BlurryLoadingImage, Loader } from "../../Components";
+import { useMutation } from "../../Common";
+import { Loader } from "../../Components";
 import {
   Destination,
   DestinationInfo,
   DestinationLink,
   DestinationsContainer,
-  ImageContainer,
 } from "./styledComponents";
 import { useQuery } from "@apollo/client";
-import NewDestinationModal from "./NewDestinationModal";
+import { DestinationData, NewDestinationModal } from "./Destination";
 
-const Destinations = memo(({ continent }) => {
+const Destinations = ({ continent }) => {
   const { loading, error, data } = useQuery(GET_DESTINATIONS, {
     variables: {},
   });
@@ -63,24 +62,11 @@ const Destinations = memo(({ continent }) => {
     <DestinationsContainer>
       {createDestinationContext}
       {destinations.map((destination) => (
-        <Destination key={destination.id}>
-          <DestinationLink
-            to={TOURS_PATH}
-            parameter={destination.name}
-            state={destination}
-          >
-            <ImageContainer>
-              <BlurryLoadingImage image={destination.image} />
-            </ImageContainer>
-            <DestinationInfo>
-              <h4>{destination.name}</h4>
-            </DestinationInfo>
-          </DestinationLink>
-        </Destination>
+        <DestinationData destination={destination} />
       ))}
       <Modal />
     </DestinationsContainer>
   );
-});
+};
 
 export default Destinations;

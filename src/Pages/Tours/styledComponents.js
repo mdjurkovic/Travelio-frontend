@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const TourArticle = styled.article`
   margin: 12px 0;
   width: 1200px;
+  a {
+    text-transform: unset;
+    font-weight: unset;
+  }
 `;
 
 export const TourBox = styled.div`
@@ -52,8 +56,7 @@ export const AvailabilityContainer = styled.i`
   vertical-align: middle;
   display: inline-block;
   padding-right: 4px;
-  color: ${(props) =>
-    props.active ? "var(--color-affirmative);" : "var(--color-negative)"};
+  color: ${(props) => props.color};
 `;
 
 export const AvailabilityText = styled.span`
@@ -72,22 +75,4 @@ export const PriceTag = styled.div`
 
 export const NotFound = styled.div`
   margin: 40px;
-`;
-
-export const NewTour = styled.div`
-  height: 130px;
-  width: 100%;
-  background: white;
-`;
-
-export const TourName = styled.h3`
-  cursor: pointer;
-  sup {
-    visibility: hidden;
-  }
-  &:hover {
-    sup {
-      visibility: visible;
-    }
-  }
 `;

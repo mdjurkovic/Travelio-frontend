@@ -1,13 +1,7 @@
 import { useState } from "react";
-import Destinations from "./Destinations/Destinations";
+import Destinations from "./Destinations";
 import { WorldMap } from "../Components";
-import styled from "styled-components";
-
-const HomeBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+import { HomeBox } from "./Destinations/styledComponents";
 
 const Home = () => {
   const [selected, onSelect] = useState(null);
@@ -22,11 +16,13 @@ const Home = () => {
         </s>
         <s>3 cascade delete guiders / lock finished tours</s>
         <br />
-        4 dont delete destination, deactivate them
+        4 dont delete destinations, deactivate them (hide or disable)
         <br />
-        5 passengers <br />
-        6 edit tour <br />
-        <s>7 countries world map</s>
+        <b>5 On click open up a modal to edit the tour</b> <br />
+        6 Add passengers to the tour <br />
+        <s>7 Handle tour availability</s>
+        <br />
+        <s>8 countries world map</s>
         <br />
       </span>
       <Destinations continent={selected} />

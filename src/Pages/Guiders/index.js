@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { useQuery } from "@apollo/client";
-import styled from "styled-components";
 import { Loader, PopConfirm } from "../../Components";
 import { useMutation } from "../../Common";
 import {
@@ -9,40 +8,10 @@ import {
   GET_GUIDERS,
   UPDATE_GUIDER,
 } from "./queries";
+import { AddGuiderContainer, Table } from "./styledComponents";
 import { Avatar, Form, Input, Typography } from "antd";
 
 const { Paragraph } = Typography;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-
-  th,
-  td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: center;
-    .ant-typography {
-      margin: 0;
-      inset-inline-start: unset;
-    }
-    span {
-      span {
-        line-height: unset;
-      }
-    }
-  }
-
-  th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
-`;
-
-const AddGuiderContainer = styled.div`
-  text-align: center;
-  margin-top: 48px;
-`;
 
 const GuidersTable = () => {
   const createGuiderRef = useRef(null);

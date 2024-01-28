@@ -1,12 +1,5 @@
 import WorldMap from "react-world-map";
-import styled from "styled-components";
-
-const Fieldset = styled.fieldset`
-  border-radius: 50%;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-`;
+import { Fieldset } from "../styledComponents";
 
 const WorldMapComponent = ({ selected, onSelect }) => {
   return (

@@ -1,14 +1,13 @@
 import { useQuery } from "@apollo/client";
-import { Loader, PopConfirm, Tooltip } from "../../Components";
-import { DESTINATIONS_PATH, useMutation } from "../../Common";
+import { Loader, PopConfirm, Tooltip } from "../../../Components";
+import { DESTINATIONS_PATH, useMutation } from "../../../Common";
 import { useState } from "react";
-import { TourData } from "./Tour";
+import { NewTourModal, TourData } from "../../Tours/Tour";
 import { Navigate, useLocation } from "react-router-dom";
-import NewTourModal from "./Tour/NewTourModal";
 import { DeleteOutlined } from "@ant-design/icons";
-import { TourName } from "./styledComponents";
-import { CREATE_TOUR, DELETE_TOUR, GET_TOURS } from "./queries";
-import { DELETE_DESTINATION, GET_DESTINATIONS } from "../Destinations/queries";
+import { DestinationName } from "../styledComponents";
+import { CREATE_TOUR, DELETE_TOUR, GET_TOURS } from "../../Tours/queries";
+import { DELETE_DESTINATION, GET_DESTINATIONS } from "../queries";
 
 const DestinationTours = () => {
   const location = useLocation();
@@ -84,7 +83,7 @@ const DestinationTours = () => {
 
   return (
     <>
-      <TourName>
+      <DestinationName>
         {destination.name}
         <PopConfirm
           handleDelete={handleDeleteDestination}
@@ -96,7 +95,7 @@ const DestinationTours = () => {
             </Tooltip>
           </sup>
         </PopConfirm>
-      </TourName>
+      </DestinationName>
 
       {createTourContext}
       {deleteTourContext}

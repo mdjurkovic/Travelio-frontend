@@ -47,3 +47,21 @@ export const NewDestination = styled(FlexCenter)`
   border-style: ridge;
   border-radius: 50px;
 `;
+
+export const DestinationName = styled.h3`
+  cursor: pointer;
+  sup {
+    visibility: hidden;
+  }
+  &:hover {
+    sup {
+      visibility: visible;
+    }
+  }
+`;
+
+export const HomeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

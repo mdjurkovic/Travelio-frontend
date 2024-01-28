@@ -20,8 +20,12 @@ export default function Router() {
       element: <Home />,
     },
     {
-      path: `${TOURS_PATH}/:tourName`,
+      path: `${DESTINATIONS_PATH}/:destinationName${TOURS_PATH}`,
       element: <DestinationTours />,
+    },
+    {
+      path: `${TOURS_PATH}/:tourId`,
+      element: <div>asd</div>,
     },
     {
       path: TOURS_PATH,
