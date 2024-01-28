@@ -8,7 +8,7 @@ import { DESTINATIONS_PATH, TOURS_PATH } from "../../../Common";
 import { BlurryLoadingImage } from "../../../Components";
 
 const DestinationData = ({ destination }) => (
-  <Destination key={destination.id}>
+  <Destination>
     <DestinationLink
       to={DESTINATIONS_PATH}
       parameter={destination.name}

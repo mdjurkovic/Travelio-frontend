@@ -1,35 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useQuery } from "@apollo/client";
-import styled from "styled-components";
 import { CREATE_COUNTRY, GET_COUNTRIES, UPDATE_COUNTRY } from "./queries";
 import { Loader, Switch, WorldMap } from "../../Components";
 import { useMutation } from "../../Common";
-
-const Table = styled.table`
-  border-collapse: collapse;
-  margin-bottom: 12px;
-
-  th,
-  td {
-    padding: 12px;
-    border: 1px solid #ddd;
-  }
-
-  th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
-`;
-
-const CountryName = styled.h3`
-  margin: 0;
-`;
-
-const CountriesContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  width: 70%;
-`;
+import { CountriesContainer, CountryName, Table } from "./styledComponents";
 
 const Countries = () => {
   const { loading, error, data } = useQuery(GET_COUNTRIES);

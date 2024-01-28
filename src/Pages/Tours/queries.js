@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_TOURS = gql`
-  query Tours($destinationId: ID = null) {
-    tours(destinationId: $destinationId) {
+  query Tours($destination: ID) {
+    tours(destination: $destination) {
       id
       name
       price

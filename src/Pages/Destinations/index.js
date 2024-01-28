@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { CREATE_DESTINATION, GET_DESTINATIONS } from "./queries";
 import { useMutation } from "../../Common";
 import { Loader } from "../../Components";
@@ -11,7 +11,7 @@ import {
 import { useQuery } from "@apollo/client";
 import { DestinationData, NewDestinationModal } from "./Destination";
 
-const Destinations = ({ continent }) => {
+const Destinations = memo(({ continent }) => {
   const { loading, error, data } = useQuery(GET_DESTINATIONS, {
     variables: {},
   });
@@ -62,11 +62,11 @@ const Destinations = ({ continent }) => {
     <DestinationsContainer>
       {createDestinationContext}
       {destinations.map((destination) => (
-        <DestinationData destination={destination} />
+        <DestinationData destination={destination} key={destination.id} />
       ))}
       <Modal />
     </DestinationsContainer>
   );
-};
+});
 
 export default Destinations;

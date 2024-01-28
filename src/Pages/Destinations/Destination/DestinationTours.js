@@ -11,20 +11,20 @@ import { DELETE_DESTINATION, GET_DESTINATIONS } from "../queries";
 
 const DestinationTours = () => {
   const location = useLocation();
-  const destinationId = location.state.id;
-  const destinationImage = location.state.image;
   const destination = location.state;
   const [open, setOpen] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const { loading, error, data } = useQuery(GET_TOURS);
+  const { loading, error, data } = useQuery(GET_TOURS, {
+    variables: { destination: destination?.id },
+  });
   const { mutation: createTour, contextHolder: createTourContext } =
     useMutation(
       CREATE_TOUR,
       GET_TOURS,
       "Error creating tour",
       "Tour successfully created",
-      {}
+      { destination: destination?.id }
     );
   const { mutation: deleteTour, contextHolder: deleteTourContext } =
     useMutation(
@@ -32,7 +32,7 @@ const DestinationTours = () => {
       GET_TOURS,
       "Error deleting tour",
       "Tour successfully deleted",
-      {}
+      { destination: destination?.id }
     );
   const {
     mutation: deleteDestination,
@@ -45,15 +45,23 @@ const DestinationTours = () => {
     {}
   );
 
-  if (loading) return <Loader />;
-  if (error) return <p>Error :(</p>;
-
-  if (shouldRedirect) {
+  if (shouldRedirect || !location.state) {
     return <Navigate to={DESTINATIONS_PATH} replace />;
   }
 
   const handleRedirect = () => {
     setShouldRedirect(true);
+  };
+
+  if (loading) return <Loader />;
+  if (error) return <p>Error :(</p>;
+
+  const destinationId = location.state.id;
+  const destinationImage = location.state.image;
+
+  const handleDeleteDestination = async () => {
+    await deleteDestination({ id: destination.id });
+    await handleRedirect();
   };
 
   const Modal = () => {
@@ -70,15 +78,6 @@ const DestinationTours = () => {
         )}
       </>
     );
-  };
-
-  const filteredData = data.tours.filter(
-    (item) => item.destination.id === destinationId
-  );
-
-  const handleDeleteDestination = async () => {
-    await deleteDestination({ id: destination.id });
-    await handleRedirect();
   };
 
   return (
@@ -101,7 +100,7 @@ const DestinationTours = () => {
       {deleteTourContext}
       {deleteDestinationContext}
       <TourData
-        tours={filteredData}
+        tours={data.tours}
         destinationImage={destinationImage}
         destinationId={destinationId}
         destination={destination}

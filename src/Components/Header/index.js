@@ -35,7 +35,7 @@ const Header = () => {
           <li>
             <Link
               to={TOURS_PATH}
-              selected={location.pathname.startsWith(TOURS_PATH)}
+              selected={location.pathname.includes(TOURS_PATH)}
             >
               Tours
             </Link>
