@@ -1,25 +1,26 @@
-import { Form, Input, Modal, Select } from "antd";
+import { Alert, Form, Input, Modal, Select } from "antd";
 import { useQuery } from "@apollo/client";
-import { GET_COUNTRIES, GET_DESTINATION_TYPES } from "./queries";
-import React, { useState } from "react";
-import { ModalForm, ModalFormItem, ModalHeader } from "../../Common";
+import { GET_COUNTRIES, GET_DESTINATION_TYPES } from "../queries";
+import { useState } from "react";
+import { ModalForm, ModalFormItem, ModalHeader } from "../../../Common";
+import { Upload } from "../../../Components";
 
 const NewDestinationModal = ({ open, setOpen, createDestination }) => {
-  const {
-    loading: cLoading,
-    error: cError,
-    data: cData,
-  } = useQuery(GET_COUNTRIES, { variables: { active: true } });
-  const {
-    loading: dtLoading,
-    error: dtError,
-    data: dtData,
-  } = useQuery(GET_DESTINATION_TYPES, {});
+  const { data: cData } = useQuery(GET_COUNTRIES, {
+    variables: { active: true },
+  });
+  const { data: dtData } = useQuery(GET_DESTINATION_TYPES, {});
 
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [form] = Form.useForm();
   const destinationTypes = dtData ? dtData.destinationTypes : [];
   const countries = cData ? cData.countries : [];
+  const [coverName, setCoverName] = useState("");
+
+  const beforeUpload = (file) => {
+    setCoverName(file.name);
+    return false;
+  };
 
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
@@ -36,17 +37,18 @@ const NewDestinationModal = ({ open, setOpen, createDestination }) => {
       const destination = {
         name: values.name,
         type: jsonArray,
-        //image: values.image,
+        image: coverName,
         country: values.country,
       };
 
       await createDestination({ destination });
-
       setConfirmLoading(false);
       handleCancel();
     } catch (error) {
-      console.log("fail");
       setConfirmLoading(false);
+      return (
+        <Alert message="Error creating Destination" type="error" closable />
+      );
     }
   };
 
@@ -97,7 +99,11 @@ const NewDestinationModal = ({ open, setOpen, createDestination }) => {
             ))}
           </Select>
         </ModalFormItem>
-        <ModalFormItem label="Country" name="country">
+        <ModalFormItem
+          label="Country"
+          name="country"
+          rules={[{ required: true, message: "Select the country!" }]}
+        >
           <Select placeholder="Country" showSearch={true}>
             {countries.map(({ id, name }) => (
               <Select.Option key={id} value={id} filterOption={filterOption}>
@@ -105,6 +111,9 @@ const NewDestinationModal = ({ open, setOpen, createDestination }) => {
               </Select.Option>
             ))}
           </Select>
+        </ModalFormItem>
+        <ModalFormItem label="Cover">
+          <Upload beforeUpload={beforeUpload} />
         </ModalFormItem>
       </ModalForm>
     </Modal>

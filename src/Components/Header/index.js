@@ -1,37 +1,13 @@
 import React from "react";
-import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import { Link } from "../Components";
+import { Link } from "../../Components";
 import {
   COUNTRIES_PATH,
   DESTINATIONS_PATH,
   GUIDERS_PATH,
   TOURS_PATH,
-} from "../Common";
-
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px;
-  margin-bottom: 40px;
-
-  nav {
-    display: flex;
-    align-items: center;
-
-    ul {
-      display: flex;
-      list-style: none;
-      margin: 0;
-
-      li {
-        margin-left: 48px;
-        }
-      }
-    }
-  }
-`;
+} from "../../Common";
+import { HeaderContainer } from "../styledComponents";
 
 const Header = () => {
   const location = useLocation();
@@ -50,18 +26,18 @@ const Header = () => {
           </li>
           <li>
             <Link
-              to={GUIDERS_PATH}
-              selected={location.pathname === GUIDERS_PATH}
+              to={TOURS_PATH}
+              selected={location.pathname.includes(TOURS_PATH)}
             >
-              Guiders
+              Tours
             </Link>
           </li>
           <li>
             <Link
-              to={TOURS_PATH}
-              selected={location.pathname.startsWith(TOURS_PATH)}
+              to={GUIDERS_PATH}
+              selected={location.pathname === GUIDERS_PATH}
             >
-              Tours
+              Guiders
             </Link>
           </li>
           <li>

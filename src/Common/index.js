@@ -1,11 +1,11 @@
-import { dateFormat, nightsDifference } from "./utils";
+import { dateFormat, isPastCurrentDate, nightsDifference } from "./utils";
 import useMutationHelper from "./useMutationHelper";
 import {
   FlexCenter,
   ModalForm,
   ModalFormItem,
   ModalHeader,
-} from "./StyledComponents";
+} from "../Styles/styledComponents";
 import {
   COUNTRIES_PATH,
   DESTINATIONS_PATH,
@@ -20,6 +20,7 @@ export {
   TOURS_PATH,
   dateFormat,
   nightsDifference,
+  isPastCurrentDate,
   useMutationHelper as useMutation,
   ModalForm,
   ModalHeader,

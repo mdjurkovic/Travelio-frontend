@@ -7,10 +7,16 @@ const StyledLink = styled(Link)`
     props?.selected ? "var(--color-secondary)" : "var(--color-primary)"};
 `;
 
-const LinkComponent = ({ to, parameter = "", children, ...restProps }) => {
+const LinkComponent = ({
+  to,
+  parameter = "",
+  childPath = "",
+  children,
+  ...restProps
+}) => {
   const encodedParameter = encodeURIComponent(parameter).replace(/%20/g, "-");
 
-  const finalTo = parameter ? `${to}/${encodedParameter}` : `${to}`;
+  const finalTo = parameter ? `${to}/${encodedParameter}${childPath}` : `${to}`;
 
   return (
     <StyledLink to={finalTo} {...restProps}>

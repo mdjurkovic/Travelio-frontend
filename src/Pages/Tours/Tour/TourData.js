@@ -1,8 +1,6 @@
-import { dateFormat, nightsDifference } from "../../../Common";
-import { BlurryLoadingImage, PopConfirm } from "../../../Components";
+import { dateFormat, nightsDifference, TOURS_PATH } from "../../../Common";
+import { BlurryLoadingImage, Link } from "../../../Components";
 import {
-  Availability,
-  AvailabilityText,
   DateSection,
   DaysSection,
   ImageSection,
@@ -12,72 +10,60 @@ import {
   PriceTag,
   TourArticle,
   TourBox,
-} from "../StyledComponents";
+} from "../styledComponents";
 import React from "react";
+import Availability from "./Availability";
 
-const TourData = ({ tours, destinationImage, deleteTour }) => {
+const TourData = ({ tours, destinationImage }) => {
   if (!tours.length)
     return (
       <NotFound>No tours for this destination or selected filter(s)</NotFound>
     );
 
-  const handleDelete = async (id) => {
-    await deleteTour({ id });
-  };
-
   return (
     <>
-      {tours.map(
-        ({ id, name, departureDate, returnDate, nights, price, image }) => (
-          <TourArticle key={id}>
-            <TourBox key={id}>
+      {tours.map((tour) => (
+        <TourArticle key={tour.id}>
+          <Link to={TOURS_PATH} parameter={tour.id} state={tour}>
+            <TourBox key={tour.id}>
               <DateSection>
                 <h5>Departure</h5>
-                <span>{dateFormat(departureDate)}</span>
+                <span>{dateFormat(tour.departureDate)}</span>
               </DateSection>
               <DateSection>
                 <h5>Return</h5>
-                <span>{dateFormat(returnDate)}</span>
+                <span>{dateFormat(tour.returnDate)}</span>
               </DateSection>
               <DaysSection>
                 <h5>Nights</h5>
                 <div>
-                  {nights ||
-                    nightsDifference(returnDate, departureDate) ||
+                  {tour.nights ||
+                    nightsDifference(tour.returnDate, tour.departureDate) ||
                     "Unknown"}
                 </div>
               </DaysSection>
               <ImageSection>
-                <BlurryLoadingImage image={image || destinationImage} />
+                <BlurryLoadingImage image={tour.image || destinationImage} />
               </ImageSection>
               <NameSection>
-                <h4>{name}</h4>
-                <Availability active={true}>
-                  <AvailabilityText>Available</AvailabilityText>
-                </Availability>
+                <h4>{tour.name}</h4>
+                <Availability tour={tour} />
               </NameSection>
+              <div>
+                <h5>Guider</h5>
+                {tour.guider.active ? tour.guider.name : "TBD"}
+              </div>
               <PriceSection>
                 <h5>Price</h5>
                 <span>
-                  <PriceTag>{price}</PriceTag>
+                  <PriceTag>{tour.price}</PriceTag>
                   <span>e</span>
                 </span>
               </PriceSection>
-              <PopConfirm
-                handleDelete={(id) => handleDelete(id)}
-                message="tour"
-              >
-                <button>delete</button>
-              </PopConfirm>
             </TourBox>
-          </TourArticle>
-        )
-      )}
-      {/*<TourArticle key="newTour">*/}
-      {/*  <TourBox>*/}
-      {/*    <h4>NEW</h4>*/}
-      {/*  </TourBox>*/}
-      {/*</TourArticle>*/}
+          </Link>
+        </TourArticle>
+      ))}
     </>
   );
 };

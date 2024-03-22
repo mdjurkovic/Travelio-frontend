@@ -1,5 +1,5 @@
 import {
-  Button,
+  Alert,
   DatePicker,
   Form,
   Input,
@@ -11,25 +11,21 @@ import {
 } from "antd";
 import { useQuery } from "@apollo/client";
 import { GET_DESTINATION_TYPES, GET_GUIDERS } from "../queries";
-import React, { useState } from "react";
-import Upload from "antd/es/upload/Upload";
-import { UploadOutlined } from "@ant-design/icons";
-import { ModalForm, ModalFormItem, ModalHeader } from "../../../Common";
+import { useState } from "react";
+import {
+  isPastCurrentDate,
+  ModalForm,
+  ModalFormItem,
+  ModalHeader,
+} from "../../../Common";
+import { Upload } from "../../../Components";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
-  const {
-    loading: dtLoading,
-    error: dtError,
-    data: dtData,
-  } = useQuery(GET_DESTINATION_TYPES, {});
-  const {
-    loading: guidersLoading,
-    error: guidersError,
-    data: guidersData,
-  } = useQuery(GET_GUIDERS, {});
+  const { error: dtError, data: dtData } = useQuery(GET_DESTINATION_TYPES, {});
+  const { error: guidersError, data: guidersData } = useQuery(GET_GUIDERS, {});
 
   const destinationTypes = dtData ? dtData.destinationTypes : [];
   const guiders = guidersData ? guidersData.guiders : [];
@@ -37,6 +33,16 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
   const [coverName, setCoverName] = useState("");
   const defaultPassengers = [10, 60];
   const [form] = Form.useForm();
+
+  const handleCancel = () => setOpen(false);
+
+  if (dtError)
+    return (
+      <Alert message="Error fetching DestinationTypes" type="error" closable />
+    );
+
+  if (guidersError)
+    return <Alert message="Error fetching Guiders" type="error" closable />;
 
   const beforeUpload = (file) => {
     setCoverName(file.name);
@@ -72,8 +78,6 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
 
   const disabledDate = (current) => current && current < new Date();
 
-  const handleCancel = () => setOpen(false);
-
   return (
     <Modal
       open={open}
@@ -92,20 +96,21 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
         }}
         layout="horizontal"
         form={form}
+        initialValues={{ passengers: defaultPassengers }}
       >
         <ModalFormItem
           label="Name"
           name="name"
           rules={[{ required: true, message: "Input the name!" }]}
         >
-          <Input placeholder="Name" />
+          <Input placeholder="Name of the tour" />
         </ModalFormItem>
         <ModalFormItem
           label="Type"
           name="type"
           rules={[{ required: true, message: "Select the tour type!" }]}
         >
-          <Select mode="multiple">
+          <Select mode="multiple" placeholder="Type of tour">
             {destinationTypes.map(({ id, label }) => (
               <Select.Option key={id} value={label}>
                 {label}
@@ -114,7 +119,7 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           </Select>
         </ModalFormItem>
         <ModalFormItem label="Guider" name="guider">
-          <Select>
+          <Select placeholder="Guider for the tour">
             {guiders.map(({ id, name }) => (
               <Select.Option key={id} value={id}>
                 {name}
@@ -133,7 +138,7 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           ]}
         >
           <RangePicker
-            disabledDate={disabledDate}
+            disabledDate={isPastCurrentDate}
             placeholder={["Departure", "Return"]}
           />
         </ModalFormItem>
@@ -156,17 +161,10 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           <Switch />
         </ModalFormItem>
         <ModalFormItem label="Cover">
-          <Upload
-            name="cover"
-            beforeUpload={beforeUpload}
-            showUploadList={true}
-            maxCount={1}
-          >
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-          </Upload>
+          <Upload beforeUpload={beforeUpload} />
         </ModalFormItem>
         <ModalFormItem label="Passengers" name="passengers">
-          <Slider range defaultValue={defaultPassengers} />
+          <Slider range max={60} />
         </ModalFormItem>
       </ModalForm>
     </Modal>

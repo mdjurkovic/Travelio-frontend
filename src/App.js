@@ -1,13 +1,14 @@
-import { Header } from "./Components";
-import AdminDashboard from "./Styles/GlobalStyles";
+import GlobalStyle from "./Styles/GlobalStyles";
+import { Footer, Header } from "./Components";
 import Router from "./Routes/routes";
 
 const App = () => {
   return (
     <div className="App">
+      <GlobalStyle />
       <Header />
       <Router />
-      <AdminDashboard />
+      <Footer />
     </div>
   );
 };

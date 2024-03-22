@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   /* Fonts */
@@ -12,6 +12,8 @@ const GlobalStyle = createGlobalStyle`
     --color-text: #4F5D75;
     --color-warning: #FFC107;
     --color-affirmative: #7ABD30;
+    --color-negative: #FF3333;
+    --color-past: #808080;
   }
 
   /* Reset */
@@ -109,9 +111,6 @@ const GlobalStyle = createGlobalStyle`
   /* Forms */
   input[type="text"],
   input[type="email"],
-  input {
-    height: 3rem;
-  }
   textarea {
     width: 100%;
     padding: 0.5rem;
@@ -139,6 +138,24 @@ const GlobalStyle = createGlobalStyle`
     
     .map-selected:hover, .map-unselected:hover {
         cursor: pointer;
+    }
+    
+     button, input, .ant-select {
+        height: 3rem;
+    }
+    
+    .ant-form-item-control-input-content {
+        .ant-typography-edit-content {
+            inset-inline-start: 0!important;
+            margin-top: unset!important;
+        }
+        .ant-typography {
+            height: 40px;
+            margin-bottom: 2rem!important;
+            .ant-typography-edit-content-confirm {
+                inset-block-end: 0;
+            }
+        }
     }
 `;
 

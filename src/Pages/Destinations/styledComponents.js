@@ -3,7 +3,7 @@ import { FlexCenter } from "../../Common";
 import { Link } from "../../Components";
 
 export const DestinationsContainer = styled.div`
-  margin: 40px 0 20px;
+  margin-top: 40px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -46,4 +46,26 @@ export const NewDestination = styled(FlexCenter)`
   border: 1px solid;
   border-style: ridge;
   border-radius: 50px;
+`;
+
+export const DestinationHeader = styled.div`
+  width: 100%;
+  text-align: center;
+  position: relative;
+`;
+
+export const DestinationSwitch = styled.div`
+  position: absolute;
+  right: 0;
+  top: calc(100% / 2 - 12px);
+`;
+
+export const HomeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const NewDestinationButton = styled.button`
+  margin: 12px 0 24px;
 `;
