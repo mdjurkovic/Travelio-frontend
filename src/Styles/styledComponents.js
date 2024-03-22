@@ -22,4 +22,10 @@ const FlexCenter = styled.div`
   align-items: center;
 `;
 
-export { ModalHeader, ModalForm, ModalFormItem, FlexCenter };
+const FlexBetween = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export { ModalHeader, ModalForm, ModalFormItem, FlexCenter, FlexBetween };

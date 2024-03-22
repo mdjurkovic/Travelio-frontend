@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import DefaultLoaderImage from "../../Images/Image-loader.png";
-import DefaultImage from "../../Images/Image-loader.png";
+import DefaultImage from "../../Images/Image-Default.png";
 
 const StyledImage = styled.img`
   filter: ${(props) => (props.imageLoading ? "blur(20px)" : "")};

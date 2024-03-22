@@ -1,10 +1,22 @@
 import { gql } from "@apollo/client";
 
+export const GET_DESTINATION = gql`
+  query Destination($id: ID!) {
+    destination(id: $id) {
+      name
+      id
+      active
+      image
+    }
+  }
+`;
+
 export const GET_DESTINATIONS = gql`
   query Destinations {
     destinations {
       name
       id
+      active
       image
       country {
         name
@@ -41,9 +53,9 @@ export const CREATE_DESTINATION = gql`
   }
 `;
 
-export const DELETE_DESTINATION = gql`
-  mutation DeleteDestination($id: ID!) {
-    deleteDestination(id: $id) {
+export const UPDATE_DESTINATION = gql`
+  mutation UpdateDestination($id: ID!, $active: Boolean) {
+    updateDestination(id: $id, active: $active) {
       name
     }
   }

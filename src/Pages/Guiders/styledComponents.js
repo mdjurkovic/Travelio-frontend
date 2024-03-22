@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  text-align: center;
 
   th,
   td {
@@ -22,11 +23,14 @@ export const Table = styled.table`
 
   th {
     background-color: #f2f2f2;
-    text-align: left;
   }
 `;
 
 export const AddGuiderContainer = styled.div`
   text-align: center;
   margin-top: 48px;
+`;
+
+export const EditGuiderCell = styled.td`
+  width: 178px;
 `;

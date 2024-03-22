@@ -6,6 +6,7 @@ import {
   GUIDERS_PATH,
   TOURS_PATH,
 } from "../Common";
+import { EditTour } from "../Pages/Tours/Tour";
 // layouts
 //import DashboardLayout from './layouts/dashboard';
 //import LogoOnlyLayout from './layouts/LogoOnlyLayout';
@@ -24,12 +25,12 @@ export default function Router() {
       element: <DestinationTours />,
     },
     {
-      path: `${TOURS_PATH}/:tourId`,
-      element: <div>asd</div>,
-    },
-    {
       path: TOURS_PATH,
       element: <Tours />,
+    },
+    {
+      path: `${TOURS_PATH}/:tourId`,
+      element: <EditTour />,
     },
     {
       path: GUIDERS_PATH,

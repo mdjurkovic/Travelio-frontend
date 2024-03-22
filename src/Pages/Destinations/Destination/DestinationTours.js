@@ -1,22 +1,25 @@
 import { useQuery } from "@apollo/client";
-import { Loader, PopConfirm, Tooltip } from "../../../Components";
-import { DESTINATIONS_PATH, useMutation } from "../../../Common";
+import { Loader, Switch } from "../../../Components";
+import { useMutation } from "../../../Common";
 import { useState } from "react";
 import { NewTourModal, TourData } from "../../Tours/Tour";
-import { Navigate, useLocation } from "react-router-dom";
-import { DeleteOutlined } from "@ant-design/icons";
-import { DestinationName } from "../styledComponents";
-import { CREATE_TOUR, DELETE_TOUR, GET_TOURS } from "../../Tours/queries";
-import { DELETE_DESTINATION, GET_DESTINATIONS } from "../queries";
+import { useLocation } from "react-router-dom";
+import {
+  DestinationHeader,
+  DestinationSwitch,
+  NewDestinationButton,
+} from "../styledComponents";
+import { CREATE_TOUR, GET_TOURS } from "../../Tours/queries";
+import { GET_DESTINATIONS, UPDATE_DESTINATION } from "../queries";
 
 const DestinationTours = () => {
   const location = useLocation();
   const destination = location.state;
   const [open, setOpen] = useState(false);
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [active, setActive] = useState(destination.active);
 
   const { loading, error, data } = useQuery(GET_TOURS, {
-    variables: { destination: destination?.id },
+    variables: { destination: destination.id },
   });
   const { mutation: createTour, contextHolder: createTourContext } =
     useMutation(
@@ -24,34 +27,17 @@ const DestinationTours = () => {
       GET_TOURS,
       "Error creating tour",
       "Tour successfully created",
-      { destination: destination?.id }
-    );
-  const { mutation: deleteTour, contextHolder: deleteTourContext } =
-    useMutation(
-      DELETE_TOUR,
-      GET_TOURS,
-      "Error deleting tour",
-      "Tour successfully deleted",
-      { destination: destination?.id }
+      { destination: destination.id }
     );
   const {
-    mutation: deleteDestination,
-    contextHolder: deleteDestinationContext,
+    mutation: updateDestination,
+    contextHolder: updateDestinationContext,
   } = useMutation(
-    DELETE_DESTINATION,
+    UPDATE_DESTINATION,
     GET_DESTINATIONS,
-    "Error deleting destination",
-    "Destination successfully deleted",
-    {}
+    "Error updating destination",
+    "Destination successfully updated"
   );
-
-  if (shouldRedirect || !location.state) {
-    return <Navigate to={DESTINATIONS_PATH} replace />;
-  }
-
-  const handleRedirect = () => {
-    setShouldRedirect(true);
-  };
 
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
@@ -59,15 +45,20 @@ const DestinationTours = () => {
   const destinationId = location.state.id;
   const destinationImage = location.state.image;
 
-  const handleDeleteDestination = async () => {
-    await deleteDestination({ id: destination.id });
-    await handleRedirect();
+  const handleDestinationUpdate = async (value) => {
+    await updateDestination({
+      id: destination.id,
+      active: value,
+    });
+    setActive(value);
   };
 
   const Modal = () => {
     return (
       <>
-        <button onClick={() => setOpen(true)}>New</button>
+        <NewDestinationButton onClick={() => setOpen(true)}>
+          New
+        </NewDestinationButton>
         {open && (
           <NewTourModal
             open={open}
@@ -82,29 +73,23 @@ const DestinationTours = () => {
 
   return (
     <>
-      <DestinationName>
-        {destination.name}
-        <PopConfirm
-          handleDelete={handleDeleteDestination}
-          message="destination"
-        >
-          <sup>
-            <Tooltip title="Delete">
-              <DeleteOutlined />
-            </Tooltip>
-          </sup>
-        </PopConfirm>
-      </DestinationName>
+      <DestinationHeader>
+        <h3>{destination.name}</h3>
+        <DestinationSwitch>
+          <Switch
+            checked={active}
+            onChange={(value) => handleDestinationUpdate(value)}
+          />
+        </DestinationSwitch>
+      </DestinationHeader>
 
       {createTourContext}
-      {deleteTourContext}
-      {deleteDestinationContext}
+      {updateDestinationContext}
       <TourData
         tours={data.tours}
         destinationImage={destinationImage}
         destinationId={destinationId}
         destination={destination}
-        deleteTour={deleteTour}
       />
       <Modal />
     </>

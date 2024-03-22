@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   /* Fonts */
@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     --color-warning: #FFC107;
     --color-affirmative: #7ABD30;
     --color-negative: #FF3333;
+    --color-past: #808080;
   }
 
   /* Reset */
@@ -141,6 +142,20 @@ const GlobalStyle = createGlobalStyle`
     
      button, input, .ant-select {
         height: 3rem;
+    }
+    
+    .ant-form-item-control-input-content {
+        .ant-typography-edit-content {
+            inset-inline-start: 0!important;
+            margin-top: unset!important;
+        }
+        .ant-typography {
+            height: 40px;
+            margin-bottom: 2rem!important;
+            .ant-typography-edit-content-confirm {
+                inset-block-end: 0;
+            }
+        }
     }
 `;
 

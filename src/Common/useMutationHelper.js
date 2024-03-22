@@ -6,7 +6,7 @@ const useMutationHelper = (
   refetchQuery,
   errorMessage = "Error",
   successMessage = "Success",
-  refetchVariables
+  refetchVariables = {}
 ) => {
   const { success, error, contextHolder } = useMessage({ key: successMessage });
 

@@ -48,20 +48,24 @@ export const NewDestination = styled(FlexCenter)`
   border-radius: 50px;
 `;
 
-export const DestinationName = styled.h3`
-  cursor: pointer;
-  sup {
-    visibility: hidden;
-  }
-  &:hover {
-    sup {
-      visibility: visible;
-    }
-  }
+export const DestinationHeader = styled.div`
+  width: 100%;
+  text-align: center;
+  position: relative;
+`;
+
+export const DestinationSwitch = styled.div`
+  position: absolute;
+  right: 0;
+  top: calc(100% / 2 - 12px);
 `;
 
 export const HomeBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const NewDestinationButton = styled.button`
+  margin: 12px 0 24px;
 `;

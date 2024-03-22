@@ -8,7 +8,7 @@ import {
   GET_GUIDERS,
   UPDATE_GUIDER,
 } from "./queries";
-import { AddGuiderContainer, Table } from "./styledComponents";
+import { AddGuiderContainer, EditGuiderCell, Table } from "./styledComponents";
 import { Avatar, Form, Input, Typography } from "antd";
 
 const { Paragraph } = Typography;
@@ -82,7 +82,7 @@ const GuidersTable = () => {
               <td>
                 <Avatar>{name[0]}</Avatar>
               </td>
-              <td>
+              <EditGuiderCell>
                 <Paragraph
                   editable={{
                     onChange: (newName) => handleUpdateGuider(id, newName),
@@ -90,7 +90,7 @@ const GuidersTable = () => {
                 >
                   {name}
                 </Paragraph>
-              </td>
+              </EditGuiderCell>
               <td>{toursCount}</td>
               <td>
                 <PopConfirm

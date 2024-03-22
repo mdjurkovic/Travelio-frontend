@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Select } from "antd";
+import { Alert, Form, Input, Modal, Select } from "antd";
 import { useQuery } from "@apollo/client";
 import { GET_COUNTRIES, GET_DESTINATION_TYPES } from "../queries";
 import { useState } from "react";
@@ -6,16 +6,10 @@ import { ModalForm, ModalFormItem, ModalHeader } from "../../../Common";
 import { Upload } from "../../../Components";
 
 const NewDestinationModal = ({ open, setOpen, createDestination }) => {
-  const {
-    loading: cLoading,
-    error: cError,
-    data: cData,
-  } = useQuery(GET_COUNTRIES, { variables: { active: true } });
-  const {
-    loading: dtLoading,
-    error: dtError,
-    data: dtData,
-  } = useQuery(GET_DESTINATION_TYPES, {});
+  const { data: cData } = useQuery(GET_COUNTRIES, {
+    variables: { active: true },
+  });
+  const { data: dtData } = useQuery(GET_DESTINATION_TYPES, {});
 
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [form] = Form.useForm();
@@ -48,12 +42,13 @@ const NewDestinationModal = ({ open, setOpen, createDestination }) => {
       };
 
       await createDestination({ destination });
-
       setConfirmLoading(false);
       handleCancel();
     } catch (error) {
-      console.log("fail");
       setConfirmLoading(false);
+      return (
+        <Alert message="Error creating Destination" type="error" closable />
+      );
     }
   };
 

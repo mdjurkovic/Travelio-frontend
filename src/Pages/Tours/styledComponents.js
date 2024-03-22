@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { Button, Form, InputNumber } from "antd";
 
 export const TourArticle = styled.article`
   margin: 12px 0;
-  width: 1200px;
+  min-width: 1000px;
   a {
     text-transform: unset;
     font-weight: unset;
@@ -26,12 +27,12 @@ export const TourBox = styled.div`
 
 export const DateSection = styled.div`
   text-align: center;
-  width: 80px;
+  width: 95px;
 `;
 
 export const DaysSection = styled.div`
   text-align: center;
-  width: 50px;
+  width: 80px;
 `;
 
 export const ImageSection = styled.div`
@@ -40,6 +41,7 @@ export const ImageSection = styled.div`
   border-radius: 4px;
   overflow: hidden;
   position: relative;
+  margin: 0 10px;
 `;
 
 export const Cover = styled.img`
@@ -49,7 +51,7 @@ export const Cover = styled.img`
 `;
 
 export const NameSection = styled.div`
-  width: 400px;
+  width: 300px;
 `;
 
 export const AvailabilityContainer = styled.i`
@@ -75,4 +77,26 @@ export const PriceTag = styled.div`
 
 export const NotFound = styled.div`
   margin: 40px;
+`;
+
+export const EditTourForm = styled(Form)`
+    text-align: center;
+    min-width 900px;
+`;
+
+export const FormFlexContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const FormFlexItem = styled.div`
+  min-width: 300px;
+`;
+
+export const FormButton = styled(Button)`
+  width: 100px;
+`;
+
+export const StyledInputNumber = styled(InputNumber)`
+  width: 110px;
 `;

@@ -1,4 +1,5 @@
 import {
+  Alert,
   DatePicker,
   Form,
   Input,
@@ -11,23 +12,20 @@ import {
 import { useQuery } from "@apollo/client";
 import { GET_DESTINATION_TYPES, GET_GUIDERS } from "../queries";
 import { useState } from "react";
-import { ModalForm, ModalFormItem, ModalHeader } from "../../../Common";
+import {
+  isPastCurrentDate,
+  ModalForm,
+  ModalFormItem,
+  ModalHeader,
+} from "../../../Common";
 import { Upload } from "../../../Components";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
-  const {
-    loading: dtLoading,
-    error: dtError,
-    data: dtData,
-  } = useQuery(GET_DESTINATION_TYPES, {});
-  const {
-    loading: guidersLoading,
-    error: guidersError,
-    data: guidersData,
-  } = useQuery(GET_GUIDERS, {});
+  const { error: dtError, data: dtData } = useQuery(GET_DESTINATION_TYPES, {});
+  const { error: guidersError, data: guidersData } = useQuery(GET_GUIDERS, {});
 
   const destinationTypes = dtData ? dtData.destinationTypes : [];
   const guiders = guidersData ? guidersData.guiders : [];
@@ -35,6 +33,16 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
   const [coverName, setCoverName] = useState("");
   const defaultPassengers = [10, 60];
   const [form] = Form.useForm();
+
+  const handleCancel = () => setOpen(false);
+
+  if (dtError)
+    return (
+      <Alert message="Error fetching DestinationTypes" type="error" closable />
+    );
+
+  if (guidersError)
+    return <Alert message="Error fetching Guiders" type="error" closable />;
 
   const beforeUpload = (file) => {
     setCoverName(file.name);
@@ -69,8 +77,6 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
   };
 
   const disabledDate = (current) => current && current < new Date();
-
-  const handleCancel = () => setOpen(false);
 
   return (
     <Modal
@@ -132,7 +138,7 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           ]}
         >
           <RangePicker
-            disabledDate={disabledDate}
+            disabledDate={isPastCurrentDate}
             placeholder={["Departure", "Return"]}
           />
         </ModalFormItem>
@@ -158,7 +164,7 @@ const NewTourModal = ({ open, setOpen, destinationId, createTour }) => {
           <Upload beforeUpload={beforeUpload} />
         </ModalFormItem>
         <ModalFormItem label="Passengers" name="passengers">
-          <Slider range />
+          <Slider range max={60} />
         </ModalFormItem>
       </ModalForm>
     </Modal>

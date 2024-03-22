@@ -1,4 +1,4 @@
-import { dateFormat, dueDate, nightsDifference } from "./utils";
+import { dateFormat, isPastCurrentDate, nightsDifference } from "./utils";
 import useMutationHelper from "./useMutationHelper";
 import {
   FlexCenter,
@@ -20,7 +20,7 @@ export {
   TOURS_PATH,
   dateFormat,
   nightsDifference,
-  dueDate,
+  isPastCurrentDate,
   useMutationHelper as useMutation,
   ModalForm,
   ModalHeader,

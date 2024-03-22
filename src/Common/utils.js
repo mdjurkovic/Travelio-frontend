@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export function nightsDifference(returnDate, departDate) {
   const timeDifference = new Date(returnDate) - new Date(departDate);
   return Math.floor(timeDifference / (1000 * 60 * 60 * 24));
@@ -10,7 +12,6 @@ export function dateFormat(date) {
   }.${formattedDate.getFullYear()}.`;
 }
 
-export function dueDate(date) {
-  const departureDate = new Date(date);
-  return departureDate < new Date();
+export function isPastCurrentDate(date) {
+  return dayjs(date) < dayjs(new Date());
 }

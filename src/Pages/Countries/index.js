@@ -10,7 +10,6 @@ const Countries = () => {
   const { mutation: createCountry } = useMutation(
     CREATE_COUNTRY,
     GET_COUNTRIES,
-    {},
     "Error creating country",
     "Country successfully created"
   );

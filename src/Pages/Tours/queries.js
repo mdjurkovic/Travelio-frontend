@@ -5,11 +5,13 @@ export const GET_TOURS = gql`
     tours(destination: $destination) {
       id
       name
+      description
       price
       departureDate
       returnDate
       minPassengers
       maxPassengers
+      passengers
       image
       guider {
         id
@@ -19,6 +21,10 @@ export const GET_TOURS = gql`
       destination {
         id
         name
+        type {
+          label
+          id
+        }
       }
     }
   }
@@ -45,6 +51,14 @@ export const GET_GUIDERS = gql`
 export const CREATE_TOUR = gql`
   mutation CreateTour($tour: TourCreateInput!) {
     createTour(tour: $tour) {
+      name
+    }
+  }
+`;
+
+export const UPDATE_TOUR = gql`
+  mutation Update($id: ID!, $tour: TourUpdateInput!) {
+    updateTour(id: $id, tour: $tour) {
       name
     }
   }

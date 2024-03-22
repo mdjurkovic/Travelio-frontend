@@ -26,18 +26,18 @@ const Header = () => {
           </li>
           <li>
             <Link
-              to={GUIDERS_PATH}
-              selected={location.pathname === GUIDERS_PATH}
-            >
-              Guiders
-            </Link>
-          </li>
-          <li>
-            <Link
               to={TOURS_PATH}
               selected={location.pathname.includes(TOURS_PATH)}
             >
               Tours
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={GUIDERS_PATH}
+              selected={location.pathname === GUIDERS_PATH}
+            >
+              Guiders
             </Link>
           </li>
           <li>

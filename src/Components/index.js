@@ -10,6 +10,7 @@ import TooltipComponent from "./Common/Tooltip";
 import UploadComponent from "./Common/Upload";
 import BlurryLoadingImage from "./Common/LazyImage";
 import PopConfirm from "./Common/PopConfirm";
+import DynamicInputs from "./Common/DynamicInput";
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   UploadComponent as Upload,
   BlurryLoadingImage,
   PopConfirm,
+  DynamicInputs,
 };

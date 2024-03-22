@@ -1,5 +1,5 @@
-import { Footer, Header } from "./Components";
 import GlobalStyle from "./Styles/GlobalStyles";
+import { Footer, Header } from "./Components";
 import Router from "./Routes/routes";
 
 const App = () => {
