@@ -31,7 +31,7 @@ const Home = () => {
         <br/>
         <s>9 Handle finished tours - disable for editing</s> <br/>
         <s>10 EditTour styles - guiderId flashing, form layout</s> <br/>
-        <b>11 Tour filters</b> <br/>
+        <s>11 Tour filters</s> <br/>
         <s>12 Handle tour delete</s> <br/>
         <b>13 Handle tour disable</b>
       </span>

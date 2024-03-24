@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Form } from "antd";
+import styled, {css} from "styled-components";
+import {Form} from "antd";
 
 const ModalHeader = styled.h3`
   text-align: center;
@@ -16,16 +16,28 @@ const ModalFormItem = styled(Form.Item)`
   }
 `;
 
-const FlexCenter = styled.div`
+const FlexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const FlexBetween = styled.div`
+const FlexBetween = css`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
-export { ModalHeader, ModalForm, ModalFormItem, FlexCenter, FlexBetween };
+const FlexAround = css`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const FlexEvenly = css`
+  display: flex;
+  justify-content: evenly;
+  align-items: center;
+`;
+
+export {ModalHeader, ModalForm, ModalFormItem, FlexCenter, FlexBetween, FlexAround, FlexEvenly};

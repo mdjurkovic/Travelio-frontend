@@ -1,9 +1,11 @@
 import {useQuery} from "@apollo/client";
 import {DELETE_TOUR, GET_TOURS} from "./queries";
 import {Loader, Search} from "../../Components";
-import {useMutation} from "../../Common";
+import {isPastCurrentDate, useMutation} from "../../Common";
 import React, {useState} from "react";
 import {TourData} from "./Tour";
+import {Checkbox} from "antd";
+import {DestinationFilter, DestinationHeader} from "../Destinations/styledComponents";
 
 const Tours = () => {
     const {loading, error, data} = useQuery(GET_TOURS);
@@ -14,21 +16,31 @@ const Tours = () => {
             "Error deleting tour",
             "Tour successfully deleted"
         );
-
-    const [filter, setFilter] = useState("");
+    const [searchFilter, setSearchFilter] = useState("");
+    const [showPastTours, setShowPastTours] = useState(true);
 
     if (loading) return <Loader/>;
     if (error) return <p>Error :(</p>;
 
-    const filteredData = data.tours.filter((item) =>
-        item.name.toLowerCase().includes(filter.toLowerCase())
+    const tourData = [...data.tours];
+
+    let filteredData = tourData.filter((item) =>
+        item.name.toLowerCase().startsWith(searchFilter.toLowerCase())
     );
+    if (!showPastTours) filteredData = filteredData.filter((item) =>
+        !isPastCurrentDate(item.departureDate))
 
     return (
         <>
             {deleteTourContext}
-            <Search setFilter={setFilter}/>
-            {/*<Test/>*/}
+            <DestinationHeader>
+                <Search setFilter={setSearchFilter}/>
+                <DestinationFilter>
+                    <Checkbox checked={showPastTours} onChange={() => setShowPastTours(!showPastTours)}>
+                        Show past tours
+                    </Checkbox>
+                </DestinationFilter>
+            </DestinationHeader>
             <TourData tours={filteredData} deleteTour={deleteTour}/>
         </>
     );
