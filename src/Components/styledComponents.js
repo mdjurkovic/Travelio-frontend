@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {FlexBetween} from "../Styles/styledComponents";
+import {FlexBetween} from "../Common";
 
 export const Fieldset = styled.fieldset`
   border-radius: 50%;

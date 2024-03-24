@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {FlexEvenly} from "../../Styles/styledComponents";
+import {FlexEvenly} from "../../Common";
 
 export const Table = styled.table`
   border-collapse: collapse;
