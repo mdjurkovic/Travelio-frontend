@@ -32,6 +32,15 @@ export const GET_TOURS = gql`
     }
 `;
 
+export const DELETE_TOUR = gql`
+    mutation DeleteTour($id: ID!) {
+        deleteTour(id: $id) {
+            name
+        }
+    }
+`;
+
+
 export const GET_DESTINATION_TYPES = gql`
     query DestinationTypes {
         destinationTypes {
@@ -61,14 +70,6 @@ export const CREATE_TOUR = gql`
 export const UPDATE_TOUR = gql`
     mutation Update($id: ID!, $tour: TourUpdateInput!) {
         updateTour(id: $id, tour: $tour) {
-            name
-        }
-    }
-`;
-
-export const DELETE_TOUR = gql`
-    mutation DeleteTour($id: ID!) {
-        deleteTour(id: $id) {
             name
         }
     }
