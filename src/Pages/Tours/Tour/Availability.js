@@ -11,6 +11,7 @@ const Availability = ({tour}) => {
     const isNotEnough = tour.minPassengers > tour.passengers.length;
     const isAlmostFull = tour.maxPassengers - tour.passengers.length <= 4;
     const isFull = tour.maxPassengers === tour.passengers.length;
+    const isDestinationEnabled = tour.destination.active;
 
     if (isFull) {
         color = "var(--color-negative)";
@@ -24,6 +25,10 @@ const Availability = ({tour}) => {
         color = "var(--color-past)";
         text = "Finished";
         component = <CheckCircleFilled/>;
+    } else if (!isDestinationEnabled) {
+        color = "var(--color-negative)";
+        text = "Destination disabled";
+        component = <ExclamationCircleFilled/>;
     } else if (isNotEnough) {
         color = "var(--color-warning)";
         text = "Not enough passengers";

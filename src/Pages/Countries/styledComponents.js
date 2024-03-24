@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {FlexEvenly} from "../../Styles/styledComponents";
 
 export const Table = styled.table`
   border-collapse: collapse;
@@ -21,7 +22,6 @@ export const CountryName = styled.h3`
 `;
 
 export const CountriesContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+  ${FlexEvenly};
   width: 70%;
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {FlexBetween} from "../Styles/styledComponents";
 
 export const Fieldset = styled.fieldset`
   border-radius: 50%;
@@ -8,9 +9,7 @@ export const Fieldset = styled.fieldset`
 `;
 
 export const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${FlexBetween};
   padding: 30px;
   margin-bottom: 60px;
 

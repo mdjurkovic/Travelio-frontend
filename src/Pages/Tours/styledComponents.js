@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Button, Form, InputNumber } from "antd";
+import {Button, Form, InputNumber} from "antd";
+import {FlexBetween} from "../../Styles/styledComponents";
 
 export const TourArticle = styled.article`
   margin: 12px 0;
@@ -11,15 +12,13 @@ export const TourArticle = styled.article`
 `;
 
 export const TourBox = styled.div`
+  ${FlexBetween};
   &:hover {
     color: var(--color-secondary);
   }
   cursor: pointer;
   border: 1px solid;
   color: var(--color-primary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: flex;
   box-sizing: border-box;
   padding: 25px;

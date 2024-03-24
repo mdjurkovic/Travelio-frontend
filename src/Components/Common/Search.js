@@ -1,16 +1,21 @@
-import { Input } from "antd";
+import {Input} from "antd";
+import styled from "styled-components";
 
-const SearchComponent = ({ setFilter }) => {
-  const inputHandler = (e) => {
-    const lowerCase = e.target.value.toLowerCase();
-    setFilter(lowerCase);
-  };
+const StyledInput = styled(Input)`
+  max-width: 300px;
+`
 
-  return (
-    <span>
-      <Input placeholder="Search" onChange={inputHandler} />
+const SearchComponent = ({setFilter}) => {
+    const inputHandler = (e) => {
+        const lowerCase = e.target.value.toLowerCase();
+        setFilter(lowerCase);
+    };
+
+    return (
+        <span>
+      <StyledInput placeholder="Search" onChange={inputHandler}/>
     </span>
-  );
+    );
 };
 
 export default SearchComponent;
