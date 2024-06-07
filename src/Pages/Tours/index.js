@@ -17,7 +17,7 @@ const Tours = () => {
             "Tour successfully deleted"
         );
     const [searchFilter, setSearchFilter] = useState("");
-    const [showPastTours, setShowPastTours] = useState(true);
+    const [showPastTours, setShowPastTours] = useState(false);
 
     if (loading) return <Loader/>;
     if (error) return <p>Error :(</p>;
