@@ -1,7 +1,4 @@
-џimport
-React, {useRef, useState}
-from
-"react";
+import React, {useRef, useState} from "react";
 import {useQuery} from "@apollo/client";
 import {CREATE_COUNTRY, GET_COUNTRIES, UPDATE_COUNTRY} from "./queries";
 import {Loader, Switch, WorldMap} from "../../Components";

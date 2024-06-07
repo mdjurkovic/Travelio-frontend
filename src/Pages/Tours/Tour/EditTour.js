@@ -8,7 +8,7 @@ import {DynamicInputs, PopConfirm} from "../../../Components";
 import {DELETE_TOUR, GET_TOURS, UPDATE_TOUR} from "../queries";
 import {GET_GUIDERS} from "../../Guiders/queries";
 import {EditTourForm, FormButton, FormFlexContainer, FormFlexItem, StyledInputNumber,} from "../styledComponents";
-import PlaceholderUpload from "../../../Components/Image";
+import PlaceholderUpload from "../../../Images/Image-Default.png";
 
 const {Paragraph} = Typography;
 const {TextArea} = Input;
