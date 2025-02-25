@@ -29,6 +29,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: var(--color-background);
+    background-image: url("Images/Bg11.png");
+    background-position: center;
     user-select: none;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -155,6 +157,12 @@ const GlobalStyle = createGlobalStyle`
             .ant-typography-edit-content-confirm {
                 inset-block-end: 0;
             }
+        }
+    }
+    
+    .ant-form {
+        .ant-select-selection-wrap {
+            align-self: center!important;
         }
     }
 `;

@@ -79,9 +79,20 @@ export const NotFound = styled.div`
 `;
 
 export const EditTourForm = styled(Form)`
-    text-align: center;
-    min-width 900px;
+  text-align: center;
+  min-width: 900px;
 `;
+
+export const ItemContainer = styled(Form.Item)`
+  > div {
+    display: block;
+    text-align-last: center;
+  }
+`
+
+export const PassengersForm = styled(Form.Item)`
+  width: 260px;
+`
 
 export const FormFlexContainer = styled.div`
   display: flex;
@@ -90,6 +101,9 @@ export const FormFlexContainer = styled.div`
 
 export const FormFlexItem = styled.div`
   min-width: 300px;
+  .ant-typography {
+    margin-bottom: 0!important;
+  }
 `;
 
 export const FormButton = styled(Button)`

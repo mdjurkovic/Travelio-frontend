@@ -23,5 +23,4 @@ export const CountryName = styled.h3`
 
 export const CountriesContainer = styled.div`
   ${FlexEvenly};
-  width: 70%;
 `;

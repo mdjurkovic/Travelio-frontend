@@ -12,8 +12,8 @@ export const DestinationsContainer = styled.div`
 
 export const DestinationBox = styled.div`
   margin: 0 10px 20px 10px;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
   &:hover {
@@ -74,7 +74,6 @@ export const NewDestination = styled.div`
 
 export const DestinationHeader = styled.div`
   width: 1000px;
-  text-align: center;
   position: relative;
 `;
 

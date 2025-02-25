@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { Input } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
-const DynamicForm = memo(
+const DynamicInput = memo(
   ({ passengers, maxPassengers, onInputChange, disabled }) => {
     const [inputValues, setInputValues] = useState(
       passengers.length
@@ -77,4 +77,4 @@ const DynamicForm = memo(
   }
 );
 
-export default DynamicForm;
+export default DynamicInput;

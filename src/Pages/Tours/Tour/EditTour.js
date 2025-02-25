@@ -7,8 +7,14 @@ import {Navigate, useLocation, useNavigate} from "react-router-dom";
 import {DynamicInputs, PopConfirm} from "../../../Components";
 import {DELETE_TOUR, GET_TOURS, UPDATE_TOUR} from "../queries";
 import {GET_GUIDERS} from "../../Guiders/queries";
-import {EditTourForm, FormButton, FormFlexContainer, FormFlexItem, StyledInputNumber,} from "../styledComponents";
-import PlaceholderUpload from "../../../Components/Image";
+import {
+    EditTourForm,
+    FormButton,
+    FormFlexContainer,
+    FormFlexItem,
+    ItemContainer, NoMarginParagraph, PassengersForm,
+    StyledInputNumber,
+} from "../styledComponents";
 
 const {Paragraph} = Typography;
 const {TextArea} = Input;
@@ -107,13 +113,15 @@ const EditTour = memo(() => {
                                 {editTour.name}
                             </Paragraph>
                         </Form.Item>
-                        <Form.Item
+                        <ItemContainer
+                            label="description"
                             name="description"
                             initialValue={currentTour.description}
                         >
                             <TextArea rows={4}>{editTour.name}</TextArea>
-                        </Form.Item>
-                        <Form.Item
+                        </ItemContainer>
+                        <ItemContainer
+                            label="date"
                             name="date"
                             initialValue={[
                                 dayjs(currentTour.departureDate),
@@ -130,8 +138,8 @@ const EditTour = memo(() => {
                                 disabledDate={isPastCurrentDate}
                                 placeholder={["Departure", "Return"]}
                             />
-                        </Form.Item>
-                        <Form.Item name="guider" initialValue={currentTour.guider.name}>
+                        </ItemContainer>
+                        <ItemContainer label="guider" name="guider" initialValue={currentTour.guider.name}>
                             <Select placeholder="Guider for the tour">
                                 {guiders.map(({id, name}) => (
                                     <Select.Option key={id} value={id}>
@@ -139,8 +147,9 @@ const EditTour = memo(() => {
                                     </Select.Option>
                                 ))}
                             </Select>
-                        </Form.Item>
-                        <Form.Item
+                        </ItemContainer>
+                        <ItemContainer
+                            label="price"
                             name="price"
                             initialValue={currentTour.price}
                             rules={[
@@ -151,8 +160,9 @@ const EditTour = memo(() => {
                             ]}
                         >
                             <StyledInputNumber prefix="€"/>
-                        </Form.Item>
-                        <Form.Item
+                        </ItemContainer>
+                        <ItemContainer
+                            label="number of passengers"
                             name="minMaxPassengers"
                             initialValue={[
                                 currentTour.minPassengers,
@@ -166,31 +176,30 @@ const EditTour = memo(() => {
                                 max={60}
                                 onChange={handleSliderChange}
                             />
-                        </Form.Item>
+                        </ItemContainer>
                     </FormFlexItem>
                     <>
-                        <Form.Item name="passengers">
+                        <PassengersForm name="passengers">
                             <DynamicInputs
                                 onInputChange={handleDynamicInputChange}
                                 passengers={passengers}
                                 disabled={sliderValue[1] <= passengers.length}
                                 maxPassengers={currentTour.maxPassengers}
                             />
-                        </Form.Item>
+                        </PassengersForm>
                     </>
                 </FormFlexContainer>
                 <Form.Item>
                     <FormButton type="primary" htmlType="submit">
                         save
                     </FormButton>
+                    <PopConfirm message="tour" handleDelete={onDelete}>
+                        <FormButton danger type="text" htmlType="button">
+                            delete
+                        </FormButton>
+                    </PopConfirm>
                 </Form.Item>
-                <PopConfirm message="tour" handleDelete={onDelete}>
-                    <FormButton danger type="text" htmlType="button">
-                        delete
-                    </FormButton>
-                </PopConfirm>
             </EditTourForm>
-            <PlaceholderUpload/>
         </>
     );
 });

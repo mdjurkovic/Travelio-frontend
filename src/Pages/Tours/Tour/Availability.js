@@ -14,13 +14,13 @@ const Availability = ({tour}) => {
     const isDestinationEnabled = tour.destination.active;
 
     if (isFull) {
-        color = "var(--color-negative)";
+        color = "var(--color-affirmative)";
         text = "Full";
-        component = <CloseCircleFilled/>;
+        component = <CheckCircleFilled/>;
     } else if (isDueDate && tour.passengers.length < tour.minPassengers) {
         color = "var(--color-negative)";
         text = "Cancelled";
-        component = <CheckCircleFilled/>;
+        component = <CloseCircleFilled/>;
     } else if (isDueDate) {
         color = "var(--color-past)";
         text = "Finished";

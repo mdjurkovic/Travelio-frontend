@@ -25,6 +25,8 @@ export const HeaderContainer = styled.header`
       li {
         margin-left: 48px;
         }
+      li:first-child {
+        margin-left: 0;
       }
     }
   }

@@ -18,6 +18,8 @@ const Tours = () => {
         );
     const [searchFilter, setSearchFilter] = useState("");
     const [showPastTours, setShowPastTours] = useState(true);
+    const [showDisabled, setShowDisabled] = useState(false);
+    const [showCancelled, setShowCancelled] = useState(false);
 
     if (loading) return <Loader/>;
     if (error) return <p>Error :(</p>;
@@ -27,8 +29,9 @@ const Tours = () => {
     let filteredData = tourData.filter((item) =>
         item.name.toLowerCase().startsWith(searchFilter.toLowerCase())
     );
-    if (!showPastTours) filteredData = filteredData.filter((item) =>
-        !isPastCurrentDate(item.departureDate))
+    if (!showPastTours) filteredData = filteredData.filter((item) => !isPastCurrentDate(item.departureDate))
+    if (!showDisabled) filteredData = filteredData.filter((item) => item.destination.active)
+    if (!showCancelled) filteredData = filteredData.filter((item) => item.destination.active)
 
     return (
         <>
@@ -37,7 +40,13 @@ const Tours = () => {
                 <Search setFilter={setSearchFilter}/>
                 <DestinationFilter>
                     <Checkbox checked={showPastTours} onChange={() => setShowPastTours(!showPastTours)}>
-                        Show past tours
+                        Show past
+                    </Checkbox>
+                    <Checkbox checked={showDisabled} onChange={() => setShowDisabled(!showDisabled)}>
+                        Show disabled
+                    </Checkbox>
+                    <Checkbox checked={showPastTours} onChange={() => setShowPastTours(!showPastTours)}>
+                        Show cancelled
                     </Checkbox>
                 </DestinationFilter>
             </DestinationHeader>

@@ -13,6 +13,5 @@ export function dateFormat(date) {
 }
 
 export function isPastCurrentDate(date) {
-    console.log(dayjs(date) < dayjs(new Date()))
     return dayjs(date) < dayjs(new Date());
 }
